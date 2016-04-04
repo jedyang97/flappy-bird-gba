@@ -7,7 +7,7 @@
 # The name of your desired GBA game
 # This should be a just a name i.e MyFirstGBAGame
 # No SPACES AFTER THE NAME.
-PROGNAME = Flappy Bird
+PROGNAME = FlappyBird
 
 # The object files you want to compile into your program
 # This should be a space (SPACE!) separated list of .o files

@@ -1,4 +1,4 @@
-#include "../../../../Desktop/03-31_DMA_Text/myLib.h"
+#include "myLib.h"
 #include "text.h"
 
 

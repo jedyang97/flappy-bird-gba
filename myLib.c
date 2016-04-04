@@ -7,7 +7,7 @@ void setPixel(int r, int c, unsigned short color) {
 }
 
 void drawRect(unsigned int row, unsigned int col, unsigned int height, unsigned int width, unsigned short color) {
-    for (int r = 0; r < height; r++) {
+    for (unsigned int r = 0; r < height; r++) {
 
         DMA[3].src = &color;
         DMA[3].dst = &videoBuffer[OFFSET(row + r, col, 240)];
