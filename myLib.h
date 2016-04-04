@@ -101,7 +101,7 @@ typedef struct {
 // Prototypes
 void setPixel(int r, int c, unsigned short color);
 
-void drawRect(unsigned int row, unsigned int col, unsigned int height, unsigned int width, unsigned short color);
+void drawRect(int row, int col, int height, int width, unsigned short color);
 
 void delay(int n);
 
