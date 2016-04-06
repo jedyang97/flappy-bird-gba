@@ -211,7 +211,7 @@ void drawPipes(PIPE pipes[]) {
 }
 
 void drawPipe(PIPE *pipe) {
-    if (pipe->col > SCREEN_WIDTH - pipeNeckWidth || pipe->col < 0) {
+    if (pipe->col > SCREEN_WIDTH || pipe->col < 0) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
@@ -243,6 +243,6 @@ void flyLess(BIRD *bird1) {
 
 void movePipes(PIPE pipes[]) {
     for (int i = 0; i < numPipes; ++i) {
-        pipes[i]. col -= pipeSpeed;
+        pipes[i].col -= pipeSpeed;
     }
 }
