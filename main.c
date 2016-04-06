@@ -118,7 +118,7 @@ int main() {
                 fillScreen(CYAN);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
-                    state = PLAY_FLY;
+                    fly(&ourBird);
                 }
                 drawBird(&ourBird);
                 drawPipe(pipes);
