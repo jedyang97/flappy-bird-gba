@@ -245,7 +245,7 @@ void flyLess(BIRD *bird1) {
 void movePipes(PIPE pipes[]) {
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
-        if (pipes[i].col > 0 || pipes[i].col < SCREEN_WIDTH - pipeNeckWidth) {
+        if (pipes[i].col > 0 && pipes[i].col < SCREEN_WIDTH - pipeNeckWidth) {
             pipes[i].showing = 1;
         }
     }
