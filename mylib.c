@@ -32,3 +32,14 @@ void fillScreen(volatile u16 color) {
     DMA[3].dst = videoBuffer;
     DMA[3].cnt = 38400 | DMA_ON | DMA_SOURCE_FIXED;
 }
+
+void drawImage3(int r, int c, int width, int height, const u16 *image) {
+    for (int row = 0; row < height; ++row) {
+        DMA[DMA_CHANNEL_3].src = image;
+        DMA[DMA_CHANNEL_3].dst = videoBuffer + OFFSET(r, c, width);
+        DMA[DMA_CHANNEL_3].cnt = 240 |
+                                 DMA_SOURCE_INCREMENT |
+                                 DMA_DESTINATION_INCREMENT |
+                                 DMA_ON;
+    }
+}
