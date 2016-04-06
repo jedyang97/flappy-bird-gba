@@ -58,7 +58,9 @@ void undrawBird(const u16 *image);
 
 void drawPipe(PIPE *pipe);
 
-void undrawPipeChange(PIPE *pipe, const u16 *image);
+void undrawPipeRear(PIPE *pipe, const u16 *image);
+
+void undrawPipeFront(PIPE *pipe, const u16 *image);
 
 void drawPipes();
 
@@ -248,11 +250,22 @@ void drawPipe(PIPE *pipe) {
 
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
-        undrawPipeChange(pipes + i, startScreen);
+        if (pipes[i].col < 0) {
+            undrawPipeFront(pipes + i, startScreen);
+        } else {
+            undrawPipeRear(pipes + i, startScreen);
+        }
     }
 }
 
-void undrawPipeChange(PIPE *pipe, const u16 *image) {
+void undrawPipeFront(PIPE *pipe, const u16 *image) {
+    if (!pipe->showing) {
+        return;
+    }
+
+}
+
+void undrawPipeRear(PIPE *pipe, const u16 *image) {
     if (!pipe->showing) {
         return;
     }
