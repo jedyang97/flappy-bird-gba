@@ -44,7 +44,7 @@ const int gravity = 1;
 const int pipeSpeed = 1;
 const int pipeDistance = 200;
 
-const int numPipes = 2;
+const int numPipes = 10;
 
 void reset(BIRD *bird1, PIPE pipes[]);
 
@@ -85,10 +85,9 @@ int main() {
     int bDownLastFrame = 0;
 
     while (1) {
-
+        waitForVBlank();
         switch (state) {
             case START:
-                waitForVBlank();
                 reset(&ourBird, pipes);
                 state = START_NO_DRAW;
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
@@ -108,7 +107,6 @@ int main() {
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
                     state = PLAY;
                 }
-                waitForVBlank();
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
