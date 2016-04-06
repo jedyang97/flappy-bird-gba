@@ -12,15 +12,22 @@ typedef unsigned short u16;
 extern unsigned short *videoBuffer;
 
 #define COLOR(r, g, b)  ((r) | (g)<<5 | (b)<<10)
-#define RED COLOR(31,0,0)
-#define GREEN COLOR(0,31,0)
-#define BLUE COLOR(0,0,31)
-#define YELLOW COLOR(31,31,0)
-#define CYAN COLOR(0, 31, 31)
-#define MAGENTA COLOR(31,0,31)
-#define WHITE COLOR(31,31,31)
-#define BLACK 0
-#define GRAY COLOR(15,15,15)
+#define BLACK   COLOR(0 , 0 , 0 )
+#define WHITE   COLOR(31, 31, 31)
+#define RED     COLOR(31, 0 , 0 )
+#define GREEN   COLOR(0 , 31, 0 )
+#define BLUE    COLOR(0 , 0 , 31)
+#define YELLOW  COLOR(31, 31, 0 )
+#define MAGENTA COLOR(31, 0 , 31)
+#define CYAN    COLOR(0 , 31, 31)
+#define ORANGE  COLOR(31, 15, 0 )
+#define BROWN   COLOR(18, 9 , 0 )
+#define PURPLE  COLOR(15, 0 , 15)
+#define TEAL    COLOR(0 , 15, 15)
+#define MAROON  COLOR(15, 0 , 0 )
+#define GREY    COLOR(15, 15, 15)
+#define PINK    COLOR(31, 18, 19)
+
 #define OFFSET(r, c, rowlen) ((r)*(rowlen) + (c))
 
 // Buttons
