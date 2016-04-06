@@ -80,9 +80,6 @@ int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
-    pipes = malloc(sizeof(PIPE) * numPipes);
-    currentPipe = pipes;
-
     enum GBAState state = START;
     int startDownLastFrame = 0;
     int upDownLastFrame = 0;
