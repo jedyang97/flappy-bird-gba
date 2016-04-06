@@ -44,7 +44,7 @@ const int gravity = 1;
 const int pipeSpeed = 1;
 const int pipeDistance = 100;
 
-const int numPipes = 100;
+const int numPipes = 10;
 
 void reset(BIRD *bird1, PIPE pipes[]);
 
@@ -119,6 +119,7 @@ int main() {
                 break;
             case PLAY:
                 fillScreen(CYAN);
+                drawPipes(pipes);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
@@ -130,7 +131,7 @@ int main() {
                 movePipes(pipes);
 
                 drawBird(&ourBird);
-                drawPipes(pipes);
+
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
