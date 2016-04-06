@@ -313,7 +313,7 @@ void drawBackground(const u16 *image) {
 
 void undrawImage3(int r, int c, int width, int height, const u16 *image) {
     for (int row = 0; row < height; ++row) {
-        DMA[DMA_CHANNEL_3].src = image + OFFSET(row, c, width);
+        DMA[DMA_CHANNEL_3].src = image + OFFSET(r + row, c, 240);
         DMA[DMA_CHANNEL_3].dst = videoBuffer + OFFSET(r + row, c, 240);
         DMA[DMA_CHANNEL_3].cnt = width |
                                  DMA_SOURCE_INCREMENT |
