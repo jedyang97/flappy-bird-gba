@@ -81,7 +81,6 @@ int main() {
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
 
-
     enum GBAState state = START;
     int startDownLastFrame = 0;
     int upDownLastFrame = 0;
@@ -133,7 +132,7 @@ int main() {
                     }
                 }
                 movePipes(pipes);
-                if(!checkAlive()) {
+                if (!checkAlive()) {
                     state = GAME_OVER;
                     break;
                 }
@@ -202,7 +201,7 @@ int detectCollision(BIRD *bird1, PIPE *pipe) {
 }
 
 int checkAlive() {
-    return  !detectCollision(&ourBird, currentPipe) && ! (ourBird.row < SCREEN_HEIGHT);
+    return !detectCollision(&ourBird, currentPipe) && ourBird.row < SCREEN_HEIGHT;
 }
 
 void generatePipeHeight(PIPE *pipe) {
