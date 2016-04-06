@@ -54,7 +54,7 @@ void generatePipeHeight(PIPE *pipe);
 
 void drawBird();
 
-void undrawPBird(const u16 *image);
+void undrawBird(const u16 *image);
 
 void drawPipe(PIPE *pipe);
 
