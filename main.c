@@ -122,6 +122,7 @@ int main() {
                     break;
                 }
                 drawBackground(startScreen);
+                waitForVBlank();
                 drawBird();
                 drawPipes();
                 break;
