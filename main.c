@@ -212,7 +212,7 @@ void drawPipes(PIPE pipes[]) {
 }
 
 void drawPipe(PIPE *pipe) {
-    if (pipe->col < 0 || pipe->col > SCREEN_WIDTH - pipeNeckWidth) {
+    if (pipe->col < 0 || pipe->col > SCREEN_WIDTH) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
