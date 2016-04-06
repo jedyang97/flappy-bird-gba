@@ -122,6 +122,7 @@ int main() {
                 }
                 drawBird(&ourBird);
                 drawPipe(pipes);
+                delay(delayTime);
                 break;
             case PLAY_FLY:
                 state = PLAY;
@@ -132,6 +133,7 @@ int main() {
                 }
                 drawBird(&ourBird);
                 drawPipe(pipes);
+                delay(delayTime);
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
