@@ -222,10 +222,10 @@ void drawPipe(PIPE *pipe) {
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
         drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
     }
-    for (int i = 0; i < pipeBodyHeight; ++i) {
+    for (int i = 0; i < pipeNeckHeight; ++i) {
         drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
     }
-    for (int i = 0; i < pipeBodyHeight; ++i) {
+    for (int i = 0; i < pipeNeckHeight; ++i) {
         drawImage3(i + pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckBottom);
     }
     for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
@@ -249,7 +249,7 @@ void flyLess(BIRD *bird1) {
 void movePipes(PIPE pipes[]) {
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
-        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col > 0- pipeNeckWidth) {
+        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col > 0) {
             pipes[i].showing = 1;
         } else {
             pipes[i].showing = 0;
