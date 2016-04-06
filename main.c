@@ -66,6 +66,8 @@ void applyGravity(BIRD *bird1);
 
 void fly(BIRD *bird1);
 
+void flyLess(BIRD *bird1);
+
 int score = 0;
 
 int main() {
@@ -121,7 +123,7 @@ int main() {
                     if (upDownLastFrame) {
                         ourBird.row -= flyHeight - 2;
                     } else {
-                        fly(&ourBird);
+                        flyLess(&ourBird);
                     }
                 }
                 drawBird(&ourBird);
@@ -240,5 +242,9 @@ void applyGravity(BIRD *bird1) {
 
 void fly(BIRD *bird1) {
     bird1->row -= flyHeight;
+}
+
+void flyLess(BIRD *bird1) {
+    bird1->row -= flyHeight - 3;
 }
 
