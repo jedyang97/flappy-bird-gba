@@ -136,7 +136,7 @@ int main() {
                     state = GAME_OVER;
                     break;
                 }
-                fillScreen(CYAN);
+                drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird();
                 drawPipes();
                 break;
