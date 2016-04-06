@@ -3,10 +3,15 @@
 #include "text.h"
 #include "bird.h"
 #include "startScreen.h"
+#include "pipeNeckBottom.h"
+#include "pipeNeckTop.h"
+#include "pipeBody.h"
 
 #define NUMOBJS 7
 
 #define MAXHEIGHT 149
+
+#define PIPE_MARGIN 1
 
 typedef struct {
     int showing;
@@ -35,7 +40,11 @@ enum GBAState {
 
 const int birdWidth = BIRD_WIDTH;
 const int birdHeight = BIRD_HEIGHT;
-const int pipeWidth = 26;
+const int pipeBodyWidth = PIPEBODY_WIDTH;
+const int pipeBodyHeight = PIPEBODY_HEIGHT;
+const int pipeNeckWidth = PIPENECKBOTTOM_WIDTH;
+const int pipeNeckHeight = PIPENECKBOTTOM_HEIGHT;
+const int pipeMargin = 1;
 
 const int numPipes = 3;
 
@@ -57,6 +66,8 @@ int main() {
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press SELECT to start")) / 2, "Press SELECT to start",
                            WHITE);
+                PIPE testPipe = {1,30,60, 40};
+                drawPipe(&testPipe);
                 state = START_NODRAW;
                 break;
             case START_NODRAW:
@@ -85,10 +96,22 @@ int detectCollision(BIRD *bird, PIPE *pipe) {
     if (bird->row > (pipe->topHeight - 1) && (bird->row + birdHeight) < pipe->topHeight + pipe->gapHeight) {
         return 0;
     } else {
-        if ((bird->col + birdWidth) < pipe->col || bird->col > pipe->col + pipeWidth) {
+        if ((bird->col + birdWidth) < pipe->col || bird->col > pipe->col + pipeNeckWidth) {
             return 0;
         } else {
             return 1;
         }
+    }
+}
+
+void drawPipe (PIPE *pipe) {
+    if (!pipe->showing) {
+        return;
+    }
+    for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
+        drawImage3(0, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
+    }
+    for (int i = 0; i < pipeBodyHeight; ++i) {
+        drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
     }
 }
