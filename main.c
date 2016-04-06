@@ -118,7 +118,11 @@ int main() {
                 fillScreen(CYAN);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
-                    fly(&ourBird);
+                    if (upDownLastFrame) {
+                        ourBird.row += flyHeight - 2;
+                    } else {
+                        fly(&ourBird);
+                    }
                 }
                 drawBird(&ourBird);
                 drawPipe(pipes);
