@@ -111,7 +111,7 @@ void drawPipe(PIPE *pipe) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-        drawImage3(0, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
+        drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
     }
     for (int i = 0; i < pipeBodyHeight; ++i) {
         drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
