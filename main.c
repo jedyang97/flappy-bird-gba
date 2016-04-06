@@ -108,16 +108,16 @@ int main() {
                 break;
             case PRE_PLAY:
                 state = PRE_PLAY_NO_DRAW;
-                if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
+                if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
                     state = PLAY;
                 }
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
-                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
+                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to release ball", RED);
                 break;
             case PRE_PLAY_NO_DRAW:
-                if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
+                if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
                     state = PLAY;
                 }
                 break;
@@ -169,6 +169,9 @@ int main() {
 }
 
 void reset(BIRD *bird1, PIPE pipes[]) {
+    free(pipes);
+    pipes = malloc(sizeof(PIPE) * numPipes);
+    currentPipe = pipes;
 
     bird1->col = SCREEN_WIDTH / 6;
     bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
