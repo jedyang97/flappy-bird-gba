@@ -28,14 +28,10 @@ typedef struct {
 // State enum definition
 enum GBAState {
     START,
-    START_NODRAW,
-    PLAY
-//    S1,
-//    S1_NODRAW,
-//    S2,
-//    S2_NODRAW,
-//    S3,
-//    S3_NODRAW
+    START_NO_DRAW,
+    PLAY,
+    PLAY_FLY,
+    GAME_OVER
 };
 
 const int birdWidth = BIRD_WIDTH;
@@ -53,6 +49,8 @@ int detectCollision(BIRD *bird, PIPE *pipe);
 
 void drawPipe(PIPE *pipe);
 
+int score;
+
 int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
@@ -67,13 +65,13 @@ int main() {
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 4, BIRD_WIDTH, BIRD_HEIGHT, bird);
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
-                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press SELECT to start")) / 2, "Press SELECT to start",
+                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
                 PIPE testPipe = {1, 70, 70, 40};
                 drawPipe(&testPipe);
-                state = START_NODRAW;
+                state = START_NO_DRAW;
                 break;
-            case START_NODRAW:
+            case START_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_START) && !startDownLastFrame) {
                     state = PLAY;
                 }
