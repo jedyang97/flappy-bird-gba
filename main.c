@@ -8,16 +8,16 @@
 #include "pipeBody.h"
 
 typedef struct {
-    int current;
-    int showing;
-    int col;
-    int topHeight;
-    int gapHeight;
+    volatile int current;
+    volatile int showing;
+    volatile int col;
+    volatile int topHeight;
+    volatile int gapHeight;
 } PIPE;
 
 typedef struct {
-    int row;
-    int col;
+    volatile int row;
+    volatile int col;
 } BIRD;
 
 // State enum definition
