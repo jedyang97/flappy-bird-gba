@@ -46,7 +46,7 @@ const int pipeDistance = 200;
 
 const int numPipes = 10;
 
-void reset(BIRD *bird1, PIPE pipes[]);
+void reset();
 
 void enablePipe(PIPE *pipe);
 
@@ -165,13 +165,13 @@ int main() {
 
 }
 
-void reset(BIRD *bird1, PIPE pipes[]) {
-    //free(pipes);
+void reset() {
+    free(pipes);
     pipes = malloc(sizeof(PIPE) * numPipes);
     currentPipe = pipes;
 
-    bird1->col = SCREEN_WIDTH / 6;
-    bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
+    ourBird.col = SCREEN_WIDTH / 6;
+    ourBird.row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
     enablePipe(pipes);
     for (int i = 1; i < numPipes; ++i) {
