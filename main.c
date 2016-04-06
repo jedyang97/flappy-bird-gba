@@ -256,6 +256,7 @@ void movePipes(PIPE pipes[]) {
         }
         if (pipes[i].col <= ourBird.col + birdWidth) {
             if (i == numPipes - 1) {
+                free(pipes);
                 pipes = malloc(sizeof(PIPE) * numPipes);
                 currentPipe = pipes;
             }
