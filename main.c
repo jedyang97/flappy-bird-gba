@@ -27,13 +27,12 @@ typedef struct {
 enum GBAState {
     START,
     START_NODRAW,
-    // TODO add more states here!
-            S1,
-    S1_NODRAW,
-    S2,
-    S2_NODRAW,
-    S3,
-    S3_NODRAW
+//    S1,
+//    S1_NODRAW,
+//    S2,
+//    S2_NODRAW,
+//    S3,
+//    S3_NODRAW
 };
 
 int main() {
