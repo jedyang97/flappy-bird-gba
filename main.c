@@ -105,7 +105,7 @@ int main() {
             case PRE_PLAY:
                 fillScreen(CYAN);
                 drawBird(&ourBird);
-                drawPipe(pipes);
+                drawPipes(pipes);
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
                 state = PRE_PLAY_NO_DRAW;
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
@@ -129,7 +129,7 @@ int main() {
                 }
                 movePipes(pipes);
                 drawBird(&ourBird);
-                drawPipe(pipes);
+                drawPipes(pipes);
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
