@@ -64,7 +64,7 @@ int main() {
 
         }
 
-        if (KEY_DOWN_NOW(BUTTON_A)) {
+        if (KEY_DOWN_NOW(BUTTON_SELECT)) {
             keyDownLastFrame = 1;
         } else {
             keyDownLastFrame = 0;
