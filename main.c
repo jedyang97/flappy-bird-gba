@@ -27,7 +27,7 @@ enum GBAState {
     PRE_PLAY,
     PRE_PLAY_NO_DRAW,
     PLAY,
-    PLAY_FLY,
+    //PLAY_FLY,
     GAME_OVER
 };
 
@@ -118,22 +118,10 @@ int main() {
                 fillScreen(CYAN);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
-                    state = PLAY_FLY;
+                    fly(&ourBird);
                 }
                 drawBird(&ourBird);
                 drawPipe(pipes);
-                delay(delayTime);
-                break;
-            case PLAY_FLY:
-                state = PLAY;
-                applyGravity(&ourBird);
-                fly(&ourBird);
-                if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
-                    state = PLAY_FLY;
-                }
-                drawBird(&ourBird);
-                drawPipe(pipes);
-                delay(delayTime);
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
