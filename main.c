@@ -221,7 +221,7 @@ void drawBird() {
     drawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
 }
 
-void undrawPBird(const u16 *image) {
+void undrawBird(const u16 *image) {
     undrawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, image);
 }
 
