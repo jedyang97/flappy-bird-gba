@@ -8,7 +8,6 @@
 #include "pipeBody.h"
 
 typedef struct {
-    int current;
     int showing;
     int col;
     int topHeight;
@@ -27,7 +26,8 @@ enum GBAState {
     PRE_PLAY,
     PRE_PLAY_NO_DRAW,
     PLAY,
-    GAME_OVER
+    GAME_OVER,
+    GAME_OVER_NO_DRAW
 };
 
 const int birdWidth = BIRD_WIDTH;
@@ -52,7 +52,7 @@ void enablePipe(PIPE *pipe);
 
 int detectCollision(BIRD *bird1, PIPE *pipe);
 
-int checkAlive(BIRD *bird, PIPE pipes[]);
+int checkAlive();
 
 void generatePipeHeight(PIPE *pipe);
 
@@ -133,12 +133,19 @@ int main() {
                     }
                 }
                 movePipes(pipes);
+                if(!checkAlive()) {
+                    state = GAME_OVER;
+                    break;
+                }
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
+                state = GAME_OVER_NO_DRAW;
+                break;
+            case GAME_OVER_NO_DRAW:
                 break;
 
         }
@@ -168,10 +175,8 @@ void reset(BIRD *bird1, PIPE pipes[]) {
     bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
     enablePipe(pipes);
-    pipes[0].current = 1;
     for (int i = 1; i < numPipes; ++i) {
         pipes[i].showing = 0;
-        pipes[i].current = 0;
         generatePipeHeight(pipes + i);
         pipes[i].col = pipes[0].col + i * pipeDistance;
     }
@@ -195,10 +200,10 @@ int detectCollision(BIRD *bird1, PIPE *pipe) {
         }
     }
 }
-//
-//int checkAlive(BIRD *bird, PIPE pipes[]) {
-//
-//}
+
+int checkAlive() {
+    return  detectCollision(&ourBird, currentPipe);
+}
 
 void generatePipeHeight(PIPE *pipe) {
     int baseHeight = pipeNeckHeight + 10;
@@ -250,6 +255,9 @@ void movePipes(PIPE pipes[]) {
             pipes[i].showing = 1;
         } else {
             pipes[i].showing = 0;
+        }
+        if (pipes[i].col <= ourBird.col + birdWidth) {
+            currentPipe = pipes + i;
         }
     }
 }
