@@ -27,6 +27,7 @@ typedef struct {
 enum GBAState {
     START,
     START_NODRAW,
+    PLAY
 //    S1,
 //    S1_NODRAW,
 //    S2,
@@ -53,8 +54,10 @@ int main() {
                 break;
             case START_NODRAW:
                 if (KEY_DOWN_NOW(BUTTON_A) && !keyDownLastFrame) {
-                    state = S1;
+                    state = PLAY;
                 }
+                break;
+            case PLAY:
                 break;
 
         }
