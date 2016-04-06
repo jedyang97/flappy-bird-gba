@@ -9,6 +9,7 @@
 
 typedef struct {
     int current;
+    int showing;
     int col;
     int topHeight;
     int gapHeight;
@@ -47,6 +48,8 @@ int detectCollision(BIRD *bird, PIPE *pipe);
 
 int checkAlive(BIRD *bird, PIPE pipes[]);
 
+void generatePipeHeight(PIPE *pipe);
+
 void drawPipe(PIPE *pipe);
 
 void applyGravity(BIRD *bird);
@@ -58,6 +61,11 @@ int main() {
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
     BIRD ourBird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
+    PIPE pipes[numPipes] = {{.current = 1, .showing = 1}};
+
+    for (int i = 0; i < numPipes; ++i) {
+        generatePipeHeight(pipes + i);
+    }
 
     enum GBAState state = START;
     int startDownLastFrame = 0;
@@ -68,12 +76,13 @@ int main() {
         switch (state) {
             case START:
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 5, BIRD_WIDTH, BIRD_HEIGHT, bird);
+                drawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
-                PIPE testPipe = {1, 70, 70, 40};
-                drawPipe(&testPipe);
+                for (int i = 0; i < numPipes; ++i) {
+                    drawPipe(pipes + i);
+                }
                 state = START_NO_DRAW;
                 break;
             case START_NO_DRAW:
@@ -119,12 +128,21 @@ int detectCollision(BIRD *bird, PIPE *pipe) {
         }
     }
 }
+//
+//int checkAlive(BIRD *bird, PIPE pipes[]) {
+//
+//}
 
-int checkAlive(BIRD *bird, PIPE pipes[]) {
-
+void generatePipeHeight(PIPE *pipe) {
+    int baseHeight = pipeNeckHeight + 10;
+    pipe->gapHeight = (birdHeight * 2) + rand() % (birdHeight * 2);
+    pipe->topHeight = rand() % (SCREEN_HEIGHT - pipe->gapHeight - baseHeight) + (baseHeight / 2);
 }
 
 void drawPipe(PIPE *pipe) {
+    if (!pipe->showing) {
+        return;
+    }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
         drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
     }
@@ -147,3 +165,4 @@ void applyGravity(BIRD *bird) {
 void fly(BIRD *bird) {
     bird->row += flyHeight;
 }
+
