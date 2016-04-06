@@ -80,6 +80,7 @@ int main() {
         waitForVBlank();
         switch (state) {
             case START:
+                reset(&ourBird, pipes);
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird(&ourBird);
                 drawPipes(pipes);
