@@ -27,7 +27,6 @@ enum GBAState {
     PRE_PLAY,
     PRE_PLAY_NO_DRAW,
     PLAY,
-    PLAY_FLY,
     GAME_OVER
 };
 
@@ -67,6 +66,8 @@ void applyGravity(BIRD *bird1);
 void fly(BIRD *bird1);
 
 void flyLess(BIRD *bird1);
+
+void movePipes(PIPE pipes[]);
 
 int score = 0;
 
@@ -126,16 +127,7 @@ int main() {
                         flyLess(&ourBird);
                     }
                 }
-                drawBird(&ourBird);
-                drawPipe(pipes);
-                break;
-            case PLAY_FLY:
-                state = PLAY;
-                applyGravity(&ourBird);
-                fly(&ourBird);
-                if (KEY_DOWN_NOW(BUTTON_UP)) {
-                    state = PLAY_FLY;
-                }
+                movePipes(pipes);
                 drawBird(&ourBird);
                 drawPipe(pipes);
                 break;
@@ -248,3 +240,8 @@ void flyLess(BIRD *bird1) {
     bird1->row -= flyHeight - 3;
 }
 
+void movePipes(PIPE pipes[]) {
+    for (int i = 0; i < numPipes; ++i) {
+        pipes[i]. col -= pipeSpeed;
+    }
+}
