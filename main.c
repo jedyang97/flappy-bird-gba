@@ -72,12 +72,15 @@ void movePipes(PIPE pipes[]);
 
 int score = 0;
 
+BIRD ourBird;
+PIPE pipes[numPipes];
+PIPE *currentPipe = pipes;
+
 int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
-    BIRD ourBird;
-    PIPE pipes[numPipes];
+
 
     enum GBAState state = START;
     int startDownLastFrame = 0;
