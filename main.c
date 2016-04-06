@@ -23,8 +23,6 @@ typedef struct {
 enum GBAState {
     START,
     START_NO_DRAW,
-    PRE_PLAY,
-    PRE_PLAY_NO_DRAW,
     PLAY,
     GAME_OVER,
     GAME_OVER_NO_DRAW
@@ -92,43 +90,28 @@ int main() {
         waitForVBlank();
         switch (state) {
             case START:
-                reset(&ourBird, pipes);
+                reset();
                 state = START_NO_DRAW;
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird();
                 drawPipes();
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
-                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
+                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press UP to start")) / 2, "Press UP to start",
                            WHITE);
                 break;
             case START_NO_DRAW:
-                if (KEY_DOWN_NOW(BUTTON_START) && !startDownLastFrame) {
-                    state = PRE_PLAY;
-                }
-                break;
-            case PRE_PLAY:
-                state = PRE_PLAY_NO_DRAW;
-                if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
-                    state = PLAY;
-                }
-                drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                drawBird();
-                drawPipes();
-                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to begin", RED);
-                break;
-            case PRE_PLAY_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
                     state = PLAY;
                 }
                 break;
             case PLAY:
                 movePipes();
-                applyGravity(&ourBird);
+                applyGravity();
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
                         ourBird.row -= flyHeight - 2;
                     } else {
-                        flyLess(&ourBird);
+                        flyLess();
                     }
                 }
 
@@ -146,7 +129,7 @@ int main() {
                 break;
             case GAME_OVER_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_SELECT) && !selectDownLastFrame) {
-                    state = PRE_PLAY;
+                    state = START;
                 }
                 break;
 
