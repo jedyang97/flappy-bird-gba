@@ -86,9 +86,6 @@ int main() {
     int upDownLastFrame = 0;
     int bDownLastFrame = 0;
 
-    pipes = malloc(sizeof(PIPE) * numPipes);
-    currentPipe = pipes;
-
     while (1) {
         waitForVBlank();
         switch (state) {
@@ -170,6 +167,8 @@ int main() {
 }
 
 void reset(BIRD *bird1, PIPE pipes[]) {
+    pipes = malloc(sizeof(PIPE) * numPipes);
+    currentPipe = pipes;
     bird1->col = SCREEN_WIDTH / 6;
     bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
@@ -256,7 +255,13 @@ void movePipes(PIPE pipes[]) {
             pipes[i].showing = 0;
         }
         if (pipes[i].col <= ourBird.col + birdWidth) {
+            if (i == numPipes - 1) {
+                pipes = malloc(sizeof(PIPE) * numPipes);
+                currentPipe = pipes;
+            }
             currentPipe = pipes + i;
+            score++;
+
         }
     }
 }
