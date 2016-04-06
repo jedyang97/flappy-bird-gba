@@ -73,7 +73,7 @@ void movePipes(PIPE pipes[]);
 int score = 0;
 
 BIRD ourBird;
-PIPE *pipes;
+PIPE pipes[];
 PIPE *currentPipe;
 
 int main() {
@@ -202,7 +202,7 @@ int detectCollision(BIRD *bird1, PIPE *pipe) {
 }
 
 int checkAlive() {
-    return  !detectCollision(&ourBird, currentPipe);
+    return  !detectCollision(&ourBird, currentPipe) && ! ourBird.row < SCREEN_HEIGHT;
 }
 
 void generatePipeHeight(PIPE *pipe) {
