@@ -41,7 +41,7 @@ const int pipeMargin = 1;
 
 const int delayTime = 10000;
 const int flyHeight = 3;
-const int gravity = -1;
+const int gravity = -2;
 const int pipeSpeed = 2;
 
 const int numPipes = 2;
