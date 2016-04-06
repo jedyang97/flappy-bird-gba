@@ -40,9 +40,9 @@ const int delayTime = 1;
 const int flyHeight = 5;
 const int gravity = 1;
 const int pipeSpeed = 1;
-const int pipeDistance = 160;
+const int pipeDistance = 180;
 
-const int numPipes = 5;
+const int numPipes = 3;
 
 void reset();
 
