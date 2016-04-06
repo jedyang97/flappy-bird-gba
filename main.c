@@ -135,7 +135,7 @@ void reset(BIRD *bird1, PIPE pipes[]) {
 
     enablePipe(pipes);
     pipes[0].current = 1;
-    for (int i = 0; i < numPipes; ++i) {
+    for (int i = 1; i < numPipes; ++i) {
         pipes[i].showing = 0;
         pipes[i].current = 0;
         generatePipeHeight(pipes + i);
