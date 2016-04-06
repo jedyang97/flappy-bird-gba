@@ -259,10 +259,12 @@ void movePipes(PIPE pipes[]) {
                 free(pipes);
                 pipes = malloc(sizeof(PIPE) * numPipes);
                 currentPipe = pipes;
+            } else {
+                currentPipe = pipes + i;
             }
-            currentPipe = pipes + i;
             score++;
 
         }
     }
+
 }
