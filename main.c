@@ -127,7 +127,6 @@ int main() {
                     }
                 }
                 movePipes(pipes);
-                waitForVBlank();
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
