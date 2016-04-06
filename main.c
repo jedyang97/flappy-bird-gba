@@ -7,14 +7,8 @@
 #include "pipeNeckTop.h"
 #include "pipeBody.h"
 
-#define NUMOBJS 7
-
-#define MAXHEIGHT 149
-
-#define PIPE_MARGIN 1
-
 typedef struct {
-    int showing;
+    int current;
     int col;
     int topHeight;
     int gapHeight;
@@ -41,13 +35,21 @@ const int pipeBodyHeight = PIPEBODY_HEIGHT;
 const int pipeNeckWidth = PIPENECKBOTTOM_WIDTH;
 const int pipeNeckHeight = PIPENECKBOTTOM_HEIGHT;
 const int pipeMargin = 1;
+
 const int delayTime = 10000;
+const int flyHeight = 2;
+const int gravity = -1;
+const int pipeSpeed = 2;
 
 const int numPipes = 3;
 
 int detectCollision(BIRD *bird, PIPE *pipe);
 
+int checkAlive(BIRD *bird, PIPE pipes[]);
+
 void drawPipe(PIPE *pipe);
+
+void applyGravity(BIRD *bird);
 
 int score;
 
@@ -55,15 +57,18 @@ int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
+    BIRD bird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
+
     enum GBAState state = START;
     int startDownLastFrame = 0;
+    int upDownLastFrame = 0;
 
     while (1) {
         waitForVblank();
         switch (state) {
             case START:
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 4, BIRD_WIDTH, BIRD_HEIGHT, bird);
+                drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 5, BIRD_WIDTH, BIRD_HEIGHT, bird);
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
@@ -83,6 +88,7 @@ int main() {
             case PLAY_FLY:
                 break;
             case GAME_OVER:
+                fillScreen(GREY);
                 break;
 
         }
@@ -91,6 +97,11 @@ int main() {
             startDownLastFrame = 1;
         } else {
             startDownLastFrame = 0;
+        }
+        if (KEY_DOWN_NOW(BUTTON_UP)) {
+            upDownLastFrame = 1;
+        } else {
+            upDownLastFrame = 0;
         }
     }
 
@@ -109,10 +120,11 @@ int detectCollision(BIRD *bird, PIPE *pipe) {
     }
 }
 
+int checkAlive(BIRD *bird, PIPE pipes[]) {
+
+}
+
 void drawPipe(PIPE *pipe) {
-    if (!pipe->showing) {
-        return;
-    }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
         drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
     }
@@ -126,4 +138,12 @@ void drawPipe(PIPE *pipe) {
         drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
                    pipeBodyHeight, pipeBody);
     }
+}
+
+void applyGravity(BIRD *bird) {
+    bird->row += gravity;
+}
+
+void fly(BIRD *bird) {
+    bird->row += flyHeight;
 }
