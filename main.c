@@ -85,9 +85,10 @@ int main() {
     int bDownLastFrame = 0;
 
     while (1) {
-        waitForVBlank();
+
         switch (state) {
             case START:
+                waitForVBlank();
                 reset(&ourBird, pipes);
                 state = START_NO_DRAW;
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
@@ -107,6 +108,7 @@ int main() {
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
                     state = PLAY;
                 }
+                waitForVBlank();
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
