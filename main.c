@@ -54,7 +54,7 @@ void generatePipeHeight(PIPE *pipe);
 
 void drawBird();
 
-void undrawPBird();
+void undrawPBird(const u16 *image);
 
 void drawPipe(PIPE *pipe);
 
@@ -221,6 +221,10 @@ void drawBird() {
     drawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
 }
 
+void undrawPBird(const u16 *image) {
+    undrawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, image);
+}
+
 void drawPipes() {
     for (int i = 0; i < numPipes; ++i) {
         drawPipe(pipes + i);
@@ -304,6 +308,3 @@ void movePipes() {
 
 }
 
-void undrawPBird() {
-    undrawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
-}
