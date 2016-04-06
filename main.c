@@ -202,7 +202,7 @@ int detectCollision(BIRD *bird1, PIPE *pipe) {
 }
 
 int checkAlive() {
-    return  detectCollision(&ourBird, currentPipe);
+    return  !detectCollision(&ourBird, currentPipe);
 }
 
 void generatePipeHeight(PIPE *pipe) {
