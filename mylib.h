@@ -131,4 +131,6 @@ void fillScreen(u16 color);
    */
 void drawImage3(int r, int c, int width, int height, const u16 *image);
 
+int calcStringWidth(char *string);
+
 #endif //HW09_MYLIB_H

@@ -48,8 +48,9 @@ int main() {
             case START:
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 4, BIRD_WIDTH, BIRD_HEIGHT, bird);
-                drawString(30, 60, "Flappy Bird.", MAGENTA);
-                drawString(50, 40, "Press SELECT to start", WHITE);
+                drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
+                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press SELECT to start")) / 2, "Press SELECT to start",
+                           WHITE);
                 state = START_NODRAW;
                 break;
             case START_NODRAW:

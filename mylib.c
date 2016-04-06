@@ -1,3 +1,4 @@
+#include <memory.h>
 #include "mylib.h"
 
 unsigned short *videoBuffer = (unsigned short *) 0x6000000;
@@ -42,4 +43,8 @@ void drawImage3(int r, int c, int width, int height, const u16 *image) {
                                  DMA_DESTINATION_INCREMENT |
                                  DMA_ON;
     }
+}
+
+int calcStringWidth(char *string) {
+    return (int) ((strlen(string) - 1) * 6);
 }
