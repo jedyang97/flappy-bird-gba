@@ -64,6 +64,8 @@ void drawPipe(PIPE *pipe);
 
 void applyGravity(BIRD *bird1);
 
+void fly(BIRD *bird1);
+
 int score = 0;
 
 int main() {
