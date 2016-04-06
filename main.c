@@ -56,6 +56,8 @@ void generatePipeHeight(PIPE *pipe);
 
 void drawBird(BIRD *bird1);
 
+void drawPipes(PIPE pipes[]);
+
 void drawPipe(PIPE *pipe);
 
 void applyGravity(BIRD *bird1);
@@ -68,8 +70,6 @@ int main() {
 
     BIRD ourBird;
     PIPE pipes[numPipes];
-
-    reset(&ourBird, pipes);
 
     enum GBAState state = START;
     int startDownLastFrame = 0;
@@ -84,9 +84,7 @@ int main() {
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
-                for (int i = 0; i < numPipes; ++i) {
-                    drawPipe(pipes + i);
-                }
+                drawPipes(pipes);
                 state = START_NO_DRAW;
                 break;
             case START_NO_DRAW:
@@ -95,8 +93,7 @@ int main() {
                 }
                 break;
             case PLAY:
-                fillScreen(CYAN);
-                drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 4, BIRD_WIDTH, BIRD_HEIGHT, bird);
+                reset(&ourBird, pipes);
                 break;
             case PLAY_FLY:
                 break;
@@ -172,6 +169,12 @@ void generatePipeHeight(PIPE *pipe) {
 
 void drawBird(BIRD *bird1) {
     drawImage3(bird1->row, bird1->col, birdWidth, birdHeight, bird);
+}
+
+void drawPipes(PIPE pipes[]) {
+    for (int i = 0; i < numPipes; ++i) {
+        drawPipe(pipes + i);
+    }
 }
 
 void drawPipe(PIPE *pipe) {
