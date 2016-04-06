@@ -11,6 +11,10 @@ typedef unsigned short u16;
 
 extern unsigned short *videoBuffer;
 
+#define SCREEN_WIDTH 240
+#define SCREEN_HEIGHT 160
+
+
 #define COLOR(r, g, b)  ((r) | (g)<<5 | (b)<<10)
 #define BLACK   COLOR(0 , 0 , 0 )
 #define WHITE   COLOR(31, 31, 31)

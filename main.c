@@ -47,9 +47,9 @@ int main() {
         switch (state) {
             case START:
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                drawImage3(5, 10, BIRD_WIDTH, BIRD_HEIGHT, bird);
-                drawString(4, 4, "Flappy Bird.", MAGENTA);
-                drawString(10, 20, "Press SELECT to start", WHITE);
+                drawImage3(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2, BIRD_WIDTH, BIRD_HEIGHT, bird);
+                drawString(50, 60, "Flappy Bird.", MAGENTA);
+                drawString(30, 70, "Press SELECT to start", WHITE);
                 state = START_NODRAW;
                 break;
             case START_NODRAW:
