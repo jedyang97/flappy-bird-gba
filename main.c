@@ -114,7 +114,7 @@ int main() {
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
-                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to release ball", RED);
+                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to begin", RED);
                 break;
             case PRE_PLAY_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
@@ -169,7 +169,7 @@ int main() {
 }
 
 void reset(BIRD *bird1, PIPE pipes[]) {
-    free(pipes);
+    //free(pipes);
     pipes = malloc(sizeof(PIPE) * numPipes);
     currentPipe = pipes;
 
