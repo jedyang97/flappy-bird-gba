@@ -56,7 +56,7 @@ int checkAlive();
 
 void generatePipeHeight(PIPE *pipe);
 
-void drawBird(BIRD *bird1);
+void drawBird();
 
 void drawPipes();
 
@@ -92,7 +92,7 @@ int main() {
                 reset(&ourBird, pipes);
                 state = START_NO_DRAW;
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                drawBird(&ourBird);
+                drawBird();
                 drawPipes();
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
@@ -109,7 +109,7 @@ int main() {
                     state = PLAY;
                 }
                 fillScreen(CYAN);
-                drawBird(&ourBird);
+                drawBird();
                 drawPipes();
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to begin", RED);
                 break;
@@ -119,6 +119,7 @@ int main() {
                 }
                 break;
             case PLAY:
+                movePipes();
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
@@ -127,13 +128,13 @@ int main() {
                         flyLess(&ourBird);
                     }
                 }
-                movePipes(pipes);
+
                 if (!checkAlive()) {
                     state = GAME_OVER;
                     break;
                 }
                 fillScreen(CYAN);
-                drawBird(&ourBird);
+                drawBird();
                 drawPipes();
                 break;
             case GAME_OVER:
@@ -210,8 +211,8 @@ void generatePipeHeight(PIPE *pipe) {
     pipe->topHeight = rand() % (SCREEN_HEIGHT - pipe->gapHeight - baseHeight) + (baseHeight / 2);
 }
 
-void drawBird(BIRD *bird1) {
-    drawImage3(bird1->row, bird1->col, birdWidth, birdHeight, bird);
+void drawBird() {
+    drawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
 }
 
 void drawPipes() {
