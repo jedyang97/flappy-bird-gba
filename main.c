@@ -45,6 +45,7 @@ const int pipeBodyHeight = PIPEBODY_HEIGHT;
 const int pipeNeckWidth = PIPENECKBOTTOM_WIDTH;
 const int pipeNeckHeight = PIPENECKBOTTOM_HEIGHT;
 const int pipeMargin = 1;
+const int delayTime = 10000;
 
 const int numPipes = 3;
 
@@ -57,7 +58,7 @@ int main() {
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
     enum GBAState state = START;
-    int keyDownLastFrame = 0;
+    int startDownLastFrame = 0;
 
     while (1) {
         waitForVblank();
@@ -73,7 +74,7 @@ int main() {
                 state = START_NODRAW;
                 break;
             case START_NODRAW:
-                if (KEY_DOWN_NOW(BUTTON_SELECT) && !keyDownLastFrame) {
+                if (KEY_DOWN_NOW(BUTTON_START) && !startDownLastFrame) {
                     state = PLAY;
                 }
                 break;
@@ -84,10 +85,10 @@ int main() {
 
         }
 
-        if (KEY_DOWN_NOW(BUTTON_SELECT)) {
-            keyDownLastFrame = 1;
+        if (KEY_DOWN_NOW(BUTTON_START)) {
+            startDownLastFrame = 1;
         } else {
-            keyDownLastFrame = 0;
+            startDownLastFrame = 0;
         }
     }
 
