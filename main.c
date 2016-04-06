@@ -24,6 +24,7 @@ typedef struct {
 enum GBAState {
     START,
     START_NO_DRAW,
+    PRE_PLAY,
     PLAY,
     PLAY_FLY,
     GAME_OVER
@@ -89,11 +90,18 @@ int main() {
                 break;
             case START_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_START) && !startDownLastFrame) {
-                    state = PLAY;
+                    state = PRE_PLAY;
                 }
                 break;
-            case PLAY:
+            case PRE_PLAY:
                 reset(&ourBird, pipes);
+                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
+                while (!KEY_DOWN_NOW(BUTTON_B)) {
+                }
+                state = PLAY;
+                break;
+            case PLAY:
+                fillScreen(BLACK);
                 break;
             case PLAY_FLY:
                 break;
@@ -130,13 +138,6 @@ void reset(BIRD *bird1, PIPE pipes[]) {
         generatePipeHeight(pipes + i);
     }
     score = 0;
-
-    while (!KEY_DOWN_NOW(BUTTON_B)) {
-        waitForVBlank();
-        fillScreen(CYAN);
-        drawBird(bird1);
-        drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
-    }
 }
 
 void enablePipe(PIPE *pipe) {
