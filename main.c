@@ -66,15 +66,10 @@ int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
-    BIRD ourBird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
+    BIRD ourBird;
     PIPE pipes[numPipes];
 
-    pipes[0].showing = 1;
-    pipes[0].current = 1;
-
-    for (int i = 0; i < numPipes; ++i) {
-        generatePipeHeight(pipes + i);
-    }
+    reset(&ourBird, pipes);
 
     enum GBAState state = START;
     int startDownLastFrame = 0;
@@ -131,8 +126,11 @@ void reset(BIRD *bird1, PIPE pipes[]) {
     bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
     enablePipe(pipes);
+    pipes[0].current = 1;
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].showing = 0;
+        pipes[i].current = 0;
+        generatePipeHeight(pipes + i);
     }
     score = 0;
 
