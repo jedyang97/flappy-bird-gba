@@ -68,7 +68,7 @@ int main() {
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press SELECT to start")) / 2, "Press SELECT to start",
                            WHITE);
-                PIPE testPipe = {1, 70, 100, 40};
+                PIPE testPipe = {1, 70, 70, 40};
                 drawPipe(&testPipe);
                 state = START_NODRAW;
                 break;
