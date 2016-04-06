@@ -95,6 +95,8 @@ int main() {
                 break;
             case PRE_PLAY:
                 reset(&ourBird, pipes);
+                fillScreen(CYAN);
+                drawBird(&ourBird);
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
                 while (!KEY_DOWN_NOW(BUTTON_B)) {
                 }
