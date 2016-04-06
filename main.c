@@ -58,17 +58,17 @@ void generatePipeHeight(PIPE *pipe);
 
 void drawBird(BIRD *bird1);
 
-void drawPipes(PIPE pipes[]);
+void drawPipes();
 
 void drawPipe(PIPE *pipe);
 
-void applyGravity(BIRD *bird1);
+void applyGravity();
 
-void fly(BIRD *bird1);
+void fly();
 
-void flyLess(BIRD *bird1);
+void flyLess();
 
-void movePipes(PIPE pipes[]);
+void movePipes();
 
 int score = 0;
 
@@ -93,7 +93,7 @@ int main() {
                 state = START_NO_DRAW;
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird(&ourBird);
-                drawPipes(pipes);
+                drawPipes();
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
@@ -110,7 +110,7 @@ int main() {
                 }
                 fillScreen(CYAN);
                 drawBird(&ourBird);
-                drawPipes(pipes);
+                drawPipes();
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to begin", RED);
                 break;
             case PRE_PLAY_NO_DRAW:
@@ -134,7 +134,7 @@ int main() {
                 }
                 fillScreen(CYAN);
                 drawBird(&ourBird);
-                drawPipes(pipes);
+                drawPipes();
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
@@ -214,7 +214,7 @@ void drawBird(BIRD *bird1) {
     drawImage3(bird1->row, bird1->col, birdWidth, birdHeight, bird);
 }
 
-void drawPipes(PIPE pipes[]) {
+void drawPipes() {
     for (int i = 0; i < numPipes; ++i) {
         drawPipe(pipes + i);
     }
@@ -235,19 +235,19 @@ void drawPipe(PIPE *pipe) {
     }
 }
 
-void applyGravity(BIRD *bird1) {
-    bird1->row += gravity;
+void applyGravity() {
+    ourBird.row += gravity;
 }
 
-void fly(BIRD *bird1) {
-    bird1->row -= flyHeight;
+void fly() {
+    ourBird.row -= flyHeight;
 }
 
-void flyLess(BIRD *bird1) {
-    bird1->row -= flyHeight - 3;
+void flyLess() {
+    ourBird.row -= flyHeight - 3;
 }
 
-void movePipes(PIPE pipes[]) {
+void movePipes() {
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
         if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col > 0) {
