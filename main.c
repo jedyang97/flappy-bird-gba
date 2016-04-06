@@ -42,6 +42,7 @@ const int delayTime = 1;
 const int flyHeight = 5;
 const int gravity = 1;
 const int pipeSpeed = 1;
+const int pipeDistance = 180;
 
 const int numPipes = 2;
 
@@ -166,6 +167,7 @@ void reset(BIRD *bird1, PIPE pipes[]) {
         pipes[i].showing = 0;
         pipes[i].current = 0;
         generatePipeHeight(pipes + i);
+        pipes[i].col = pipes[0].col + i * pipeDistance;
     }
     score = 0;
 }
@@ -209,7 +211,7 @@ void drawPipes(PIPE pipes[]) {
 }
 
 void drawPipe(PIPE *pipe) {
-    if (!pipe->showing) {
+    if (pipe->col > SCREEN_WIDTH - pipeNeckWidth || pipe->col < 0) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
