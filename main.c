@@ -50,6 +50,8 @@ const int numPipes = 3;
 
 int detectCollision(BIRD *bird, PIPE *pipe);
 
+void drawPipe(PIPE *pipe);
+
 int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
@@ -66,7 +68,7 @@ int main() {
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press SELECT to start")) / 2, "Press SELECT to start",
                            WHITE);
-                PIPE testPipe = {1,30,60, 40};
+                PIPE testPipe = {1, 30, 60, 40};
                 drawPipe(&testPipe);
                 state = START_NODRAW;
                 break;
@@ -104,7 +106,7 @@ int detectCollision(BIRD *bird, PIPE *pipe) {
     }
 }
 
-void drawPipe (PIPE *pipe) {
+void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
     }
