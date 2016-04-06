@@ -120,10 +120,9 @@ int main() {
                     break;
                 }
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                waitForVBlank();
+                delay(1);
                 drawBird();
                 drawPipes();
-                waitForVBlank();
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
