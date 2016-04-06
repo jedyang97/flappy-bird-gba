@@ -118,6 +118,7 @@ int main() {
                 }
                 break;
             case PLAY:
+                fillScreen(CYAN);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
@@ -128,7 +129,6 @@ int main() {
                 }
                 movePipes(pipes);
 
-                fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
                 break;
