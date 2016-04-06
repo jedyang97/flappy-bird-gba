@@ -80,6 +80,10 @@ int main() {
                 fillScreen(CYAN);
                 drawImage3(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 4, BIRD_WIDTH, BIRD_HEIGHT, bird);
                 break;
+            case PLAY_FLY:
+                break;
+            case GAME_OVER:
+                break;
 
         }
 
