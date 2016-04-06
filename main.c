@@ -70,6 +70,8 @@ void flyLess();
 
 void movePipes();
 
+void drawBackground(const u16 *image);
+
 int score = 0;
 
 BIRD ourBird;
@@ -119,8 +121,7 @@ int main() {
                     state = GAME_OVER;
                     break;
                 }
-                drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                delay(1);
+                drawBackground(startScreen);
                 drawBird();
                 drawPipes();
                 break;
@@ -270,4 +271,13 @@ void movePipes() {
         }
     }
 
+}
+
+void drawBackground(const u16 *image) {
+    DMA[DMA_CHANNEL_3].src = image;
+    DMA[DMA_CHANNEL_3].dst = videoBuffer;
+    DMA[DMA_CHANNEL_3].cnt = 38400 |
+                             DMA_SOURCE_INCREMENT |
+                             DMA_DESTINATION_INCREMENT |
+                             DMA_ON;
 }
