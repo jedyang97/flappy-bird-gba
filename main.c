@@ -73,8 +73,8 @@ void movePipes(PIPE pipes[]);
 int score = 0;
 
 BIRD ourBird;
-PIPE pipes[numPipes];
-PIPE *currentPipe = pipes;
+PIPE *pipes;
+PIPE *currentPipe;
 
 int main() {
 
@@ -86,6 +86,9 @@ int main() {
     int startDownLastFrame = 0;
     int upDownLastFrame = 0;
     int bDownLastFrame = 0;
+
+    pipes = malloc(sizeof(PIPE) * numPipes);
+    currentPipe = pipes;
 
     while (1) {
         waitForVBlank();
