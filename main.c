@@ -111,7 +111,7 @@ int main() {
                 if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
                     state = PLAY;
                 }
-                fillScreen(CYAN);
+                drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird();
                 drawPipes();
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press UP to begin", RED);
