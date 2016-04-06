@@ -73,7 +73,7 @@ void movePipes(PIPE pipes[]);
 int score = 0;
 
 BIRD ourBird;
-PIPE pipes[];
+PIPE *pipes;
 PIPE *currentPipe;
 
 int main() {
