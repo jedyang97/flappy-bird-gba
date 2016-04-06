@@ -88,6 +88,7 @@ int main() {
         switch (state) {
             case START:
                 reset(&ourBird, pipes);
+                state = START_NO_DRAW;
                 waitForVBlank();
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird(&ourBird);
@@ -95,7 +96,6 @@ int main() {
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
-                state = START_NO_DRAW;
                 break;
             case START_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_START) && !startDownLastFrame) {
@@ -103,15 +103,17 @@ int main() {
                 }
                 break;
             case PRE_PLAY:
-                waitForVBlank();
-                fillScreen(CYAN);
-                drawBird(&ourBird);
-                drawPipes(pipes);
-                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
                 state = PRE_PLAY_NO_DRAW;
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
                     state = PLAY;
                 }
+
+                waitForVBlank();
+
+                fillScreen(CYAN);
+                drawBird(&ourBird);
+                drawPipes(pipes);
+                drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
                 break;
             case PRE_PLAY_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
@@ -119,7 +121,6 @@ int main() {
                 }
                 break;
             case PLAY:
-                fillScreen(CYAN);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
@@ -129,7 +130,9 @@ int main() {
                     }
                 }
                 movePipes(pipes);
+
                 waitForVBlank();
+                fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
                 break;
