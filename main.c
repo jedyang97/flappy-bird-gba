@@ -50,33 +50,35 @@ void reGeneratePipes();
 
 void enablePipe(PIPE *pipe);
 
-int detectCollision(BIRD *bird1, PIPE *pipe);
-
-int checkAlive();
-
 void generatePipeHeight(PIPE *pipe);
 
 void drawBird();
 
-void drawPipes();
+void undrawPBird();
 
 void drawPipe(PIPE *pipe);
 
-void undrawPipes();
-
 void undrawPipe(PIPE *pipe, const u16 *image);
 
+void drawPipes();
+
+void undrawPipes();
+
 void applyGravity();
+
+
+void movePipes();
 
 void fly();
 
 void flyLess();
 
-void movePipes();
+int detectCollision(BIRD *bird1, PIPE *pipe);
+
+int checkAlive();
 
 void drawBackground(const u16 *image);
 
-void undrawImage3(int r, int c, int width, int height, const u16 *image);
 
 int score = 0;
 
@@ -114,8 +116,8 @@ int main() {
                 }
                 break;
             case PLAY:
-                //undrawPipes();
-                drawBackground(startScreen);
+                undrawPipes();
+                undrawPBird();
                 movePipes();
                 applyGravity();
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
@@ -130,8 +132,6 @@ int main() {
                     state = GAME_OVER;
                     break;
                 }
-                //drawBackground(startScreen);
-
                 drawBird();
                 drawPipes();
                 break;
@@ -259,7 +259,7 @@ void undrawPipe(PIPE *pipe, const u16 *image) {
     undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
     for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
         undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
-                   pipeBodyHeight, image);
+                     pipeBodyHeight, image);
     }
 }
 
@@ -304,22 +304,6 @@ void movePipes() {
 
 }
 
-void drawBackground(const u16 *image) {
-    DMA[DMA_CHANNEL_3].src = image;
-    DMA[DMA_CHANNEL_3].dst = videoBuffer;
-    DMA[DMA_CHANNEL_3].cnt = 38400 |
-                             DMA_SOURCE_INCREMENT |
-                             DMA_DESTINATION_INCREMENT |
-                             DMA_ON;
-}
-
-void undrawImage3(int r, int c, int width, int height, const u16 *image) {
-    for (int row = 0; row < height; ++row) {
-        DMA[DMA_CHANNEL_3].src = image + OFFSET(r + row, c, 240);
-        DMA[DMA_CHANNEL_3].dst = videoBuffer + OFFSET(r + row, c, 240);
-        DMA[DMA_CHANNEL_3].cnt = width |
-                                 DMA_SOURCE_INCREMENT |
-                                 DMA_DESTINATION_INCREMENT |
-                                 DMA_ON;
-    }
+void undrawPBird() {
+    undrawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
 }

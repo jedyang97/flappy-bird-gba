@@ -47,3 +47,23 @@ void drawImage3(int r, int c, int width, int height, const u16 *image) {
 int calcStringWidth(char *string) {
     return (int) ((strlen(string) - 1) * 6);
 }
+
+void undrawImage3(int r, int c, int width, int height, const u16 *image) {
+    for (int row = 0; row < height; ++row) {
+        DMA[DMA_CHANNEL_3].src = image + OFFSET(r + row, c, 240);
+        DMA[DMA_CHANNEL_3].dst = videoBuffer + OFFSET(r + row, c, 240);
+        DMA[DMA_CHANNEL_3].cnt = width |
+                                 DMA_SOURCE_INCREMENT |
+                                 DMA_DESTINATION_INCREMENT |
+                                 DMA_ON;
+    }
+}
+
+void drawBackground(const u16 *image) {
+    DMA[DMA_CHANNEL_3].src = image;
+    DMA[DMA_CHANNEL_3].dst = videoBuffer;
+    DMA[DMA_CHANNEL_3].cnt = 38400 |
+                             DMA_SOURCE_INCREMENT |
+                             DMA_DESTINATION_INCREMENT |
+                             DMA_ON;
+}
