@@ -44,7 +44,7 @@ const int gravity = 1;
 const int pipeSpeed = 1;
 const int pipeDistance = 200;
 
-const int numPipes = 10;
+const int numPipes = 1;
 
 void reset();
 
