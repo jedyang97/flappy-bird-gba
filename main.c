@@ -25,6 +25,7 @@ enum GBAState {
     START,
     START_NO_DRAW,
     PRE_PLAY,
+    PRE_PLAY_NO_DRAW;
     PLAY,
     PLAY_FLY,
     GAME_OVER
@@ -101,6 +102,12 @@ int main() {
                 drawBird(&ourBird);
                 drawPipe(pipes);
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
+                state = PRE_PLAY_NO_DRAW;
+                if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
+                    state = PLAY;
+                }
+                break;
+            case PRE_PLAY_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
                     state = PLAY;
                 }
