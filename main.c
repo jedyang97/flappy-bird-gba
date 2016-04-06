@@ -94,7 +94,7 @@ int main() {
             case START:
                 reset();
                 state = START_NO_DRAW;
-                drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
+                drawBackground(startScreen);
                 drawBird();
                 drawPipes();
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
