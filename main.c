@@ -76,6 +76,8 @@ void movePipes();
 
 void drawBackground(const u16 *image);
 
+void undrawImage3(int r, int c, int width, int height, const u16 *image);
+
 int score = 0;
 
 BIRD ourBird;
@@ -237,6 +239,7 @@ void drawPipe(PIPE *pipe) {
                    pipeBodyHeight, pipeBody);
     }
 }
+
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
         undrawPipe(pipes + i, startScreen);
@@ -248,12 +251,12 @@ void undrawPipe(PIPE *pipe, const u16 *image) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-        drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, image);
+        undrawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, image);
     }
-    drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
-    drawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
+    undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
+    undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
     for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-        drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
+        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
                    pipeBodyHeight, image);
     }
 }
@@ -306,4 +309,15 @@ void drawBackground(const u16 *image) {
                              DMA_SOURCE_INCREMENT |
                              DMA_DESTINATION_INCREMENT |
                              DMA_ON;
+}
+
+void undrawImage3(int r, int c, int width, int height, const u16 *image) {
+    for (int row = 0; row < height; ++row) {
+        DMA[DMA_CHANNEL_3].src = image + OFFSET(row, c, width);
+        DMA[DMA_CHANNEL_3].dst = videoBuffer + OFFSET(r + row, c, 240);
+        DMA[DMA_CHANNEL_3].cnt = width |
+                                 DMA_SOURCE_INCREMENT |
+                                 DMA_DESTINATION_INCREMENT |
+                                 DMA_ON;
+    }
 }
