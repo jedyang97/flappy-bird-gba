@@ -61,7 +61,8 @@ int main() {
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
     BIRD ourBird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
-    PIPE pipes[numPipes] = {{.current = 1, .showing = 1},};
+    PIPE pipes[numPipes] = {{.current = 1, .showing = 1},
+                            {.showing = 1}};
 
     for (int i = 0; i < numPipes; ++i) {
         generatePipeHeight(pipes + i);
