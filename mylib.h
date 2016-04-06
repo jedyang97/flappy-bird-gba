@@ -14,6 +14,8 @@ extern unsigned short *videoBuffer;
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 160
 
+#define BIRD_WIDTH
+
 
 #define COLOR(r, g, b)  ((r) | (g)<<5 | (b)<<10)
 #define BLACK   COLOR(0 , 0 , 0 )

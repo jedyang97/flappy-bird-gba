@@ -9,18 +9,15 @@
 #define MAXHEIGHT 149
 
 typedef struct {
-    int row;
+    int showing;
     int col;
-    int rdel;
-    int cdel;
-    int size;
-    u16 color;
-} MOVOBJ;
+    int topHeight;
+    int gapHeight;
+} PIPE;
 
 typedef struct {
     int row;
     int col;
-    int dy;
 } BIRD;
 
 // State enum definition
@@ -36,12 +33,20 @@ enum GBAState {
 //    S3_NODRAW
 };
 
+const int birdWidth = BIRD_WIDTH;
+const int birdHeight = BIRD_HEIGHT;
+const int pipeWidth = 26;
+
+const int numPipes = 3;
+
+int detectCollision(BIRD *bird, PIPE *pipe);
+
 int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
     enum GBAState state = START;
-    char keyDownLastFrame = 0;
+    int keyDownLastFrame = 0;
 
     while (1) {
         waitForVblank();
@@ -74,4 +79,16 @@ int main() {
     }
 
 
+}
+
+int detectCollision(BIRD *bird, PIPE *pipe) {
+    if (bird->row > (pipe->topHeight - 1) && (bird->row + birdHeight) < pipe->topHeight + pipe->gapHeight) {
+        return 0;
+    } else {
+        if ((bird->col + birdWidth) < pipe->col || bird->col > pipe->col + pipeWidth) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }
