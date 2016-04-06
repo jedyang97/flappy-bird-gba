@@ -41,7 +41,7 @@ const int pipeMargin = 1;
 
 const int delayTime = 10000;
 const int flyHeight = 3;
-const int gravity = -2;
+const int gravity = 1;
 const int pipeSpeed = 2;
 
 const int numPipes = 2;
@@ -118,7 +118,7 @@ int main() {
                 fillScreen(CYAN);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
-                    //state = PLAY_FLY;
+                    state = PLAY_FLY;
                 }
                 drawBird(&ourBird);
                 drawPipe(pipes);
@@ -235,6 +235,6 @@ void applyGravity(BIRD *bird1) {
 }
 
 void fly(BIRD *bird1) {
-    bird1->row += flyHeight;
+    bird1->row -= flyHeight;
 }
 
