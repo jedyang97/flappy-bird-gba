@@ -262,6 +262,7 @@ void movePipes() {
         pipes = nextPipe;
         currentPipe = nextPipe;
         reGeneratePipes();
+        nextPipe = NULL;
     }
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
