@@ -130,8 +130,6 @@ int main() {
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
-                waitForVBlank();
-
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
@@ -242,7 +240,7 @@ void flyLess(BIRD *bird1) {
 void movePipes(PIPE pipes[]) {
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
-        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth / 2 && pipes[i].col > 0) {
+        if (pipes[i].col < SCREEN_WIDTH && pipes[i].col > 0) {
             pipes[i].showing = 1;
         } else {
             pipes[i].showing = 0;
