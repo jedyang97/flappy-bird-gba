@@ -86,7 +86,7 @@ int main() {
     enum GBAState state = START;
     int startDownLastFrame = 0;
     int upDownLastFrame = 0;
-    int bDownLastFrame = 0;
+    int selectDownLastFrame = 0;
 
     while (1) {
         waitForVBlank();
@@ -145,6 +145,9 @@ int main() {
                 state = GAME_OVER_NO_DRAW;
                 break;
             case GAME_OVER_NO_DRAW:
+                if (KEY_DOWN_NOW(BUTTON_SELECT) && !selectDownLastFrame) {
+                    state = PLAY;
+                }
                 break;
 
         }
@@ -159,10 +162,10 @@ int main() {
         } else {
             upDownLastFrame = 0;
         }
-        if (KEY_DOWN_NOW(BUTTON_B)) {
-            bDownLastFrame = 1;
+        if (KEY_DOWN_NOW(BUTTON_SELECT)) {
+            selectDownLastFrame = 1;
         } else {
-            bDownLastFrame = 0;
+            selectDownLastFrame = 0;
         }
     }
 
