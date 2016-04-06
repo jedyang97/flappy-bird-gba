@@ -85,10 +85,10 @@ int main() {
     int bDownLastFrame = 0;
 
     while (1) {
-        waitForVBlank();
         switch (state) {
             case START:
                 reset(&ourBird, pipes);
+                waitForVBlank();
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird(&ourBird);
                 drawPipes(pipes);
@@ -103,6 +103,7 @@ int main() {
                 }
                 break;
             case PRE_PLAY:
+                waitForVBlank();
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
@@ -128,6 +129,7 @@ int main() {
                     }
                 }
                 movePipes(pipes);
+                waitForVBlank();
                 drawBird(&ourBird);
                 drawPipes(pipes);
                 break;
@@ -211,7 +213,7 @@ void drawPipes(PIPE pipes[]) {
 }
 
 void drawPipe(PIPE *pipe) {
-    if (pipe->col > SCREEN_WIDTH || pipe->col < 0 - pipeNeckWidth) {
+    if (pipe->col < 0 || pipe->col > SCREEN_WIDTH - pipeNeckWidth) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
