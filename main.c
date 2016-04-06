@@ -42,7 +42,7 @@ const int flyHeight = 2;
 const int gravity = -1;
 const int pipeSpeed = 2;
 
-const int numPipes = 1;
+const int numPipes = 2;
 
 int detectCollision(BIRD *bird, PIPE *pipe);
 
