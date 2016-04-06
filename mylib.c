@@ -17,7 +17,7 @@ void drawRect(int row, int col, int height, int width, unsigned short color) {
 
 void delay(int n) {
     volatile int x = 0;
-    for (int i = 0; i < n * 10000; i++) {
+    for (int i = 0; i < n * 100; i++) {
         x++;
     }
 }
