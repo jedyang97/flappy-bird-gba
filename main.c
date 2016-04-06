@@ -120,6 +120,7 @@ int main() {
                     break;
                 }
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
+                waitForVBlank();
                 drawBird();
                 drawPipes();
                 break;
