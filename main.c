@@ -57,7 +57,7 @@ int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
-    BIRD bird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
+    BIRD ourBird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
 
     enum GBAState state = START;
     int startDownLastFrame = 0;
