@@ -131,7 +131,7 @@ int main() {
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
-
+                waitForVBlank();
 
                 break;
             case GAME_OVER:
