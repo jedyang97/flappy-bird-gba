@@ -119,7 +119,6 @@ int main() {
                 break;
             case PLAY:
                 fillScreen(CYAN);
-                drawPipes(pipes);
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
@@ -129,7 +128,7 @@ int main() {
                     }
                 }
                 movePipes(pipes);
-
+                drawPipes(pipes);
                 drawBird(&ourBird);
 
                 break;
@@ -248,6 +247,8 @@ void movePipes(PIPE pipes[]) {
         pipes[i].col -= pipeSpeed;
         if (pipes[i].col > 0 && pipes[i].col < SCREEN_WIDTH - pipeNeckWidth) {
             pipes[i].showing = 1;
+        } else {
+            pipes[i].showing = 0;
         }
     }
 }
