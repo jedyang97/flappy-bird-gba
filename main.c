@@ -44,6 +44,7 @@ int main() {
     char keyDownLastFrame = 0;
 
     while (1) {
+        waitForVblank();
         switch (state) {
             case START:
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
