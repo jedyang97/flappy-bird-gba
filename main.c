@@ -146,7 +146,7 @@ int main() {
                 break;
             case GAME_OVER_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_SELECT) && !selectDownLastFrame) {
-                    state = PLAY;
+                    state = PRE_PLAY;
                 }
                 break;
 
