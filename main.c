@@ -62,6 +62,10 @@ void drawPipes();
 
 void drawPipe(PIPE *pipe);
 
+void undrawPipes();
+
+void undrawPipe(PIPE *pipe, const u16 *image);
+
 void applyGravity();
 
 void fly();
@@ -107,6 +111,7 @@ int main() {
                 }
                 break;
             case PLAY:
+                undrawPipes();
                 movePipes();
                 applyGravity();
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
@@ -121,8 +126,8 @@ int main() {
                     state = GAME_OVER;
                     break;
                 }
-                drawBackground(startScreen);
-                waitForVBlank();
+                //drawBackground(startScreen);
+
                 drawBird();
                 drawPipes();
                 break;
@@ -230,6 +235,26 @@ void drawPipe(PIPE *pipe) {
     for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
         drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
                    pipeBodyHeight, pipeBody);
+    }
+}
+void undrawPipes() {
+    for (int i = 0; i < numPipes; ++i) {
+        undrawPipe(pipes + i, startScreen);
+    }
+}
+
+void undrawPipe(PIPE *pipe, const u16 *image) {
+    if (!pipe->showing) {
+        return;
+    }
+    for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
+        drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, image);
+    }
+    drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
+    drawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, image);
+    for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
+        drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
+                   pipeBodyHeight, image);
     }
 }
 
