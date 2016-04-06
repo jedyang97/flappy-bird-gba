@@ -195,7 +195,7 @@ int detectCollision(BIRD *bird1, PIPE *pipe) {
 
 void generatePipeHeight(PIPE *pipe) {
     int baseHeight = pipeNeckHeight + 10;
-    pipe->gapHeight = (birdHeight * 3) + rand() % (birdHeight * 3);
+    pipe->gapHeight = (birdHeight * 3) + rand() % (birdHeight * 4);
     pipe->topHeight = rand() % (SCREEN_HEIGHT - pipe->gapHeight - baseHeight) + (baseHeight / 2);
 }
 
