@@ -114,7 +114,8 @@ int main() {
                 }
                 break;
             case PLAY:
-                undrawPipes();
+                //undrawPipes();
+                drawBackground(startScreen);
                 movePipes();
                 applyGravity();
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
