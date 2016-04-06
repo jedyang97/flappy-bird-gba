@@ -25,7 +25,7 @@ enum GBAState {
     START,
     START_NO_DRAW,
     PRE_PLAY,
-    PRE_PLAY_NO_DRAW;
+    PRE_PLAY_NO_DRAW,
     PLAY,
     PLAY_FLY,
     GAME_OVER
