@@ -11,12 +11,12 @@ PROGNAME = FlappyBird
 
 # The object files you want to compile into your program
 # This should be a space (SPACE!) separated list of .o files
-OFILES = main.o mylib.o text.o font.o bird.o
+OFILES = main.o mylib.o text.o font.o bird.o startScreen.o
 
 # The header files you have created.
 # This is necessary to determine when to recompile for files.
 # This should be a space (SPACE!) separated list of .h files
-HFILES = mylib.h text.h font.h bird.h
+HFILES = mylib.h text.h font.h bird.h startScreen.h
 
 ################################################################################
 # These are various settings used to make the GBA toolchain work
