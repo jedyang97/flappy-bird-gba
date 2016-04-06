@@ -42,7 +42,7 @@ const int flyHeight = 2;
 const int gravity = -1;
 const int pipeSpeed = 2;
 
-const int numPipes = 2;
+const int numPipes = 1;
 
 int detectCollision(BIRD *bird, PIPE *pipe);
 
@@ -61,7 +61,10 @@ int main() {
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
     BIRD ourBird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
-    PIPE pipes[] = {{.current = 1, .showing = 1, .col=0,.topHeight=0,.gapHeight=0}};
+    PIPE pipes[numPipes];
+
+    pipes[1].showing = 1;
+    pipes[1].current = 1;
 
     for (int i = 0; i < numPipes; ++i) {
         generatePipeHeight(pipes + i);
