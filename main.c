@@ -75,6 +75,7 @@ int main() {
     enum GBAState state = START;
     int startDownLastFrame = 0;
     int upDownLastFrame = 0;
+    int bDownLastFrame = 0;
 
     while (1) {
         waitForVBlank();
@@ -100,9 +101,9 @@ int main() {
                 drawBird(&ourBird);
                 drawPipe(pipes);
                 drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
-                while (!KEY_DOWN_NOW(BUTTON_B)) {
+                if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
+                    state = PLAY;
                 }
-                state = PLAY;
                 break;
             case PLAY:
                 fillScreen(BLACK);
@@ -124,6 +125,11 @@ int main() {
             upDownLastFrame = 1;
         } else {
             upDownLastFrame = 0;
+        }
+        if (KEY_DOWN_NOW(BUTTON_B)) {
+            bDownLastFrame = 1;
+        } else {
+            bDownLastFrame = 0;
         }
     }
 
