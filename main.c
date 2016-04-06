@@ -40,8 +40,8 @@ const int pipeNeckHeight = PIPENECKBOTTOM_HEIGHT;
 const int pipeMargin = 1;
 
 const int delayTime = 10000;
-const int flyHeight = 20;
-const int gravity = 0;
+const int flyHeight = 10;
+const int gravity = 1;
 const int pipeSpeed = 2;
 
 const int numPipes = 2;
