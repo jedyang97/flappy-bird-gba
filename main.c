@@ -102,7 +102,6 @@ int main() {
                 }
                 break;
             case PRE_PLAY:
-                reset(&ourBird, pipes);
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipe(pipes);
