@@ -40,7 +40,7 @@ const int pipeNeckHeight = PIPENECKBOTTOM_HEIGHT;
 const int pipeMargin = 1;
 
 const int delayTime = 10000;
-const int flyHeight = 2;
+const int flyHeight = 3;
 const int gravity = -1;
 const int pipeSpeed = 2;
 
@@ -113,9 +113,23 @@ int main() {
                 }
                 break;
             case PLAY:
-                fillScreen(BLACK);
+                fillScreen(CYAN);
+                applyGravity(&ourBird);
+                if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
+                    state = PLAY_FLY;
+                }
+                drawBird(&ourBird);
+                drawPipe(pipes);
                 break;
             case PLAY_FLY:
+                state = PLAY;
+                applyGravity(&ourBird);
+                fly(&ourBird);
+                if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
+                    state = PLAY_FLY;
+                }
+                drawBird(&ourBird);
+                drawPipe(pipes);
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
