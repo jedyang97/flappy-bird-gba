@@ -80,6 +80,8 @@ int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
+    pipes = malloc(sizeof(PIPE) * numPipes);
+    currentPipe = pipes;
 
     enum GBAState state = START;
     int startDownLastFrame = 0;
@@ -167,8 +169,7 @@ int main() {
 }
 
 void reset(BIRD *bird1, PIPE pipes[]) {
-    pipes = malloc(sizeof(PIPE) * numPipes);
-    currentPipe = pipes;
+
     bird1->col = SCREEN_WIDTH / 6;
     bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
