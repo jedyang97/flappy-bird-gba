@@ -8,16 +8,16 @@
 #include "pipeBody.h"
 
 typedef struct {
-    volatile int current;
-    volatile int showing;
-    volatile int col;
-    volatile int topHeight;
-    volatile int gapHeight;
+    int current;
+    int showing;
+    int col;
+    int topHeight;
+    int gapHeight;
 } PIPE;
 
 typedef struct {
-    volatile int row;
-    volatile int col;
+    int row;
+    int col;
 } BIRD;
 
 // State enum definition
@@ -44,7 +44,7 @@ const int gravity = 1;
 const int pipeSpeed = 1;
 const int pipeDistance = 180;
 
-const int numPipes = 10;
+const int numPipes = 3;
 
 void reset(BIRD *bird1, PIPE pipes[]);
 
@@ -85,11 +85,11 @@ int main() {
     int bDownLastFrame = 0;
 
     while (1) {
+        waitForVBlank();
         switch (state) {
             case START:
                 reset(&ourBird, pipes);
                 state = START_NO_DRAW;
-                waitForVBlank();
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
                 drawBird(&ourBird);
                 drawPipes(pipes);
@@ -107,9 +107,6 @@ int main() {
                 if (KEY_DOWN_NOW(BUTTON_B) && !bDownLastFrame) {
                     state = PLAY;
                 }
-
-                waitForVBlank();
-
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
@@ -131,7 +128,6 @@ int main() {
                 }
                 movePipes(pipes);
 
-                waitForVBlank();
                 fillScreen(CYAN);
                 drawBird(&ourBird);
                 drawPipes(pipes);
