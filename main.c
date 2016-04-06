@@ -44,7 +44,7 @@ const int gravity = 1;
 const int pipeSpeed = 1;
 const int pipeDistance = 180;
 
-const int numPipes = 2;
+const int numPipes = 10;
 
 void reset(BIRD *bird1, PIPE pipes[]);
 
