@@ -119,7 +119,7 @@ int main() {
                 applyGravity(&ourBird);
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
                     if (upDownLastFrame) {
-                        ourBird.row += flyHeight - 2;
+                        ourBird.row -= flyHeight - 2;
                     } else {
                         fly(&ourBird);
                     }
