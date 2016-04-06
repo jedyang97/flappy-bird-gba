@@ -115,7 +115,7 @@ void drawRect(int row, int col, int height, int width, unsigned short color);
 
 void delay(int n);
 
-void waitForVblank();
+void waitForVBlank();
 
 void fillScreen(u16 color);
 

@@ -22,7 +22,7 @@ void delay(int n) {
     }
 }
 
-void waitForVblank() {
+void waitForVBlank() {
     while (SCANLINECOUNTER > 160);
     while (SCANLINECOUNTER < 160);
 }

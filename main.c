@@ -44,17 +44,23 @@ const int pipeSpeed = 2;
 
 const int numPipes = 2;
 
-int detectCollision(BIRD *bird, PIPE *pipe);
+void reset(BIRD *bird1, PIPE pipes[]);
+
+void enablePipe(PIPE *pipe);
+
+int detectCollision(BIRD *bird1, PIPE *pipe);
 
 int checkAlive(BIRD *bird, PIPE pipes[]);
 
 void generatePipeHeight(PIPE *pipe);
 
+void drawBird(BIRD *bird1);
+
 void drawPipe(PIPE *pipe);
 
-void applyGravity(BIRD *bird);
+void applyGravity(BIRD *bird1);
 
-int score;
+int score = 0;
 
 int main() {
 
@@ -63,8 +69,8 @@ int main() {
     BIRD ourBird = {.row = SCREEN_HEIGHT / 2, .col = SCREEN_WIDTH / 5};
     PIPE pipes[numPipes];
 
-    pipes[1].showing = 1;
-    pipes[1].current = 1;
+    pipes[0].showing = 1;
+    pipes[0].current = 1;
 
     for (int i = 0; i < numPipes; ++i) {
         generatePipeHeight(pipes + i);
@@ -75,11 +81,11 @@ int main() {
     int upDownLastFrame = 0;
 
     while (1) {
-        waitForVblank();
+        waitForVBlank();
         switch (state) {
             case START:
                 drawImage3(0, 0, STARTSCREEN_WIDTH, STARTSCREEN_HEIGHT, startScreen);
-                drawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
+                drawBird(&ourBird);
                 drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to start")) / 2, "Press START to start",
                            WHITE);
@@ -120,11 +126,35 @@ int main() {
 
 }
 
-int detectCollision(BIRD *bird, PIPE *pipe) {
-    if (bird->row > (pipe->topHeight - 1) && (bird->row + birdHeight) < pipe->topHeight + pipe->gapHeight) {
+void reset(BIRD *bird1, PIPE pipes[]) {
+    bird1->col = SCREEN_WIDTH / 6;
+    bird1->row = SCREEN_HEIGHT / 2 - birdHeight / 2;
+
+    enablePipe(pipes);
+    for (int i = 0; i < numPipes; ++i) {
+        pipes[i].showing = 0;
+    }
+    score = 0;
+
+    while (!KEY_DOWN_NOW(BUTTON_B)) {
+        waitForVBlank();
+        fillScreen(CYAN);
+        drawBird(bird1);
+        drawString(SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, "Press B to release ball", RED);
+    }
+}
+
+void enablePipe(PIPE *pipe) {
+    pipe->showing = 1;
+    pipe->col = SCREEN_WIDTH - pipeNeckWidth - 1;
+    generatePipeHeight(pipe);
+}
+
+int detectCollision(BIRD *bird1, PIPE *pipe) {
+    if (bird1->row > (pipe->topHeight - 1) && (bird1->row + birdHeight) < pipe->topHeight + pipe->gapHeight) {
         return 0;
     } else {
-        if ((bird->col + birdWidth) < pipe->col || bird->col > pipe->col + pipeNeckWidth) {
+        if ((bird1->col + birdWidth) < pipe->col || bird1->col > pipe->col + pipeNeckWidth) {
             return 0;
         } else {
             return 1;
@@ -140,6 +170,10 @@ void generatePipeHeight(PIPE *pipe) {
     int baseHeight = pipeNeckHeight + 10;
     pipe->gapHeight = (birdHeight * 2) + rand() % (birdHeight * 2);
     pipe->topHeight = rand() % (SCREEN_HEIGHT - pipe->gapHeight - baseHeight) + (baseHeight / 2);
+}
+
+void drawBird(BIRD *bird1) {
+    drawImage3(bird1->row, bird1->col, birdWidth, birdHeight, bird);
 }
 
 void drawPipe(PIPE *pipe) {
@@ -161,11 +195,11 @@ void drawPipe(PIPE *pipe) {
     }
 }
 
-void applyGravity(BIRD *bird) {
-    bird->row += gravity;
+void applyGravity(BIRD *bird1) {
+    bird1->row += gravity;
 }
 
-void fly(BIRD *bird) {
-    bird->row += flyHeight;
+void fly(BIRD *bird1) {
+    bird1->row += flyHeight;
 }
 
