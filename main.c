@@ -48,6 +48,8 @@ const int numPipes = 2;
 
 void reset();
 
+void reGeneratePipes();
+
 void enablePipe(PIPE *pipe);
 
 int detectCollision(BIRD *bird1, PIPE *pipe);
@@ -75,6 +77,7 @@ int score = 0;
 BIRD ourBird;
 PIPE *pipes;
 PIPE *currentPipe;
+PIPE *nextPipe;
 
 int main() {
 
@@ -167,20 +170,25 @@ int main() {
 }
 
 void reset() {
-    free(pipes);
     pipes = malloc(sizeof(PIPE) * numPipes);
     currentPipe = pipes;
+
+    reGeneratePipes();
 
     ourBird.col = SCREEN_WIDTH / 6;
     ourBird.row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
+
+    score = 0;
+}
+
+void reGeneratePipes() {
     enablePipe(pipes);
     for (int i = 1; i < numPipes; ++i) {
         pipes[i].showing = 0;
         generatePipeHeight(pipes + i);
         pipes[i].col = pipes[0].col + i * pipeDistance;
     }
-    score = 0;
 }
 
 void enablePipe(PIPE *pipe) {
@@ -249,6 +257,12 @@ void flyLess() {
 }
 
 void movePipes() {
+    if (nextPipe != NULL) {
+        free(pipes);
+        pipes = nextPipe;
+        currentPipe = nextPipe;
+        reGeneratePipes();
+    }
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
         if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col > 0) {
@@ -258,12 +272,11 @@ void movePipes() {
         }
         if (pipes[i].col <= ourBird.col + birdWidth) {
             if (i == numPipes - 1) {
-                free(pipes);
-                pipes = malloc(sizeof(PIPE) * numPipes);
-                currentPipe = pipes;
+                nextPipe = malloc(sizeof(PIPE) * numPipes);
             } else {
-                currentPipe = pipes + i;
+                nextPipe = NULL;
             }
+            currentPipe = pipes + i;
             score++;
 
         }
