@@ -128,6 +128,7 @@ int main() {
                     }
                 }
                 movePipes(pipes);
+                waitForVBlank();
                 drawPipes(pipes);
                 drawBird(&ourBird);
 
