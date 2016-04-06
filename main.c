@@ -54,7 +54,7 @@ int main() {
                 state = START_NODRAW;
                 break;
             case START_NODRAW:
-                if (KEY_DOWN_NOW(BUTTON_A) && !keyDownLastFrame) {
+                if (KEY_DOWN_NOW(BUTTON_SELECT) && !keyDownLastFrame) {
                     state = PLAY;
                 }
                 break;
@@ -64,7 +64,11 @@ int main() {
 
         }
 
-
+        if (KEY_DOWN_NOW(BUTTON_A)) {
+            keyDownLastFrame = 1;
+        } else {
+            keyDownLastFrame = 0;
+        }
     }
 
 
