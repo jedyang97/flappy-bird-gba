@@ -33,8 +33,8 @@ enum GBAState {
 //    S3_NODRAW
 };
 
-const int birdWidth = 17;
-const int birdHeight = 12;
+const int birdWidth = BIRD_WIDTH;
+const int birdHeight = BIRD_HEIGHT;
 const int pipeWidth = 26;
 
 const int numPipes = 3;
