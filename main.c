@@ -325,7 +325,7 @@ void movePipes() {
             } else {
                 nextPipe = NULL;
             }
-            if (currentPipe != pipes + 1) {
+            if (currentPipe != pipes + i) {
                 score++;
             }
             currentPipe = pipes + i;
