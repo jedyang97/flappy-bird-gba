@@ -236,7 +236,7 @@ void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
     }
-    if (pipe->col < 0 && pipe->col + pipeNeckWidth > 1) {
+    if (pipe->col < 0) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
             drawImage3FromCol(i, 0, -pipe->col - pipeMargin, pipeBodyWidth, pipeBodyHeight,
                               pipeBody);
@@ -306,7 +306,7 @@ void movePipes() {
     }
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
-        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col + pipeNeckWidth > 1) {
+        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col + pipeNeckWidth > 0) {
             pipes[i].showing = 1;
         } else {
             pipes[i].showing = 0;
