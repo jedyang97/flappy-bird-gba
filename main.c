@@ -143,7 +143,7 @@ int main() {
                 char string[10];
                 sprintf(string, "%d", score);
                 drawString(40, 100, string, WHITE);
-                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to resume")) / 2, "Press START to resume",
+                drawString(150, (SCREEN_WIDTH - calcStringWidth("Press START to restart")) / 2, "Press START to restart",
                            WHITE);
                 state = GAME_OVER_NO_DRAW;
                 break;
