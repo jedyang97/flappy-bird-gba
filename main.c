@@ -134,7 +134,7 @@ int main() {
                 }
 
                 drawBird();
-                //drawPipes();
+                drawPipes();
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
@@ -236,7 +236,7 @@ void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
     }
-    if (pipe->col < 0) {
+    if (pipe->col < 0 && pipe->col + pipeNeckWidth >0) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
             drawImage3FromCol(i, 0, -pipe->col - pipeMargin, pipeBodyWidth, pipeBodyHeight,
                               pipeBody);
