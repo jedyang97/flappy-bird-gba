@@ -252,9 +252,8 @@ void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
         if (pipes[i].col < 0) {
             undrawPipeFront(pipes + i, startScreen);
-        } else {
-            undrawPipeRear(pipes + i, startScreen);
         }
+        undrawPipeRear(pipes + i, startScreen);
     }
 }
 
