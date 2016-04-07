@@ -262,13 +262,13 @@ void undrawPipeFront(PIPE *pipe, const u16 *image) {
     if (!pipe->showing) {
         return;
     }
-    for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-        undrawImage3(i, pipe->col + pipeMargin, pipeSpeed, pipeBodyHeight, image);
+    for (int i = -1; i < pipe->topHeight - pipeNeckHeight - 1; ++i) {
+        undrawImage3(i, SCREEN_WIDTH - (pipe->col + pipeMargin), pipeSpeed, pipeBodyHeight, image);
     }
-    undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeSpeed, pipeNeckHeight, image);
-    undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeSpeed, pipeNeckHeight, image);
-    for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin,
+    undrawImage3(pipe->topHeight - pipeNeckHeight, SCREEN_WIDTH - pipe->col, pipeSpeed, pipeNeckHeight, image);
+    undrawImage3(pipe->topHeight + pipe->gapHeight, SCREEN_WIDTH - pipe->col, pipeSpeed, pipeNeckHeight, image);
+    for (int i = -1; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight) - 1; ++i) {
+        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, SCREEN_WIDTH - (pipe->col + pipeMargin),
                      pipeSpeed, pipeBodyHeight, image);
     }
 }
