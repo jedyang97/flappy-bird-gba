@@ -139,7 +139,8 @@ int main() {
                 break;
             case GAME_OVER:
                 drawBackground(gameoverScreen);
-                drawString(40, 100, sprintf("%d", score), WHITE);
+                char *string = sprintf("%d", score);
+                drawString(40, 100, string, WHITE);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to resume")) / 2, "Press START to resume",
                            WHITE);
                 state = GAME_OVER_NO_DRAW;
