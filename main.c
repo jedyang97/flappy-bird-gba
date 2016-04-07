@@ -90,15 +90,19 @@ PIPE *pipes;
 PIPE *currentPipe;
 PIPE *nextPipe;
 
+// main function, containing the main loop
 int main() {
 
     REG_DISPCTL = MODE3 | BG2_ENABLE;
 
     enum GBAState state = START;
+
+    // tokens to keep track of keys
     int startDownLastFrame = 0;
     int upDownLastFrame = 0;
     int selectDownLastFrame = 0;
 
+    // main loop
     while (1) {
         waitForVBlank();
         switch (state) {
@@ -176,6 +180,7 @@ int main() {
 
 }
 
+// reset the status of the game
 void reset() {
     pipes = malloc(sizeof(PIPE) * numPipes);
     currentPipe = pipes;
@@ -188,6 +193,7 @@ void reset() {
     score = 0;
 }
 
+// initiate pipe data
 void reGeneratePipes() {
     enablePipe(pipes);
     for (int i = 1; i < numPipes; ++i) {
@@ -197,12 +203,14 @@ void reGeneratePipes() {
     }
 }
 
+// make a pipe visible
 void enablePipe(PIPE *pipe) {
     pipe->showing = 1;
     pipe->col = SCREEN_WIDTH - pipeNeckWidth - 1;
     generatePipeHeight(pipe);
 }
 
+// detect collision between bird and pipe
 int detectCollision(BIRD *bird1, PIPE *pipe) {
     if (bird1->row > (pipe->topHeight - 1) && (bird1->row + birdHeight) < pipe->topHeight + pipe->gapHeight) {
         return 0;
@@ -215,20 +223,24 @@ int detectCollision(BIRD *bird1, PIPE *pipe) {
     }
 }
 
+// check if we survived
 int checkAlive() {
     return !detectCollision(&ourBird, currentPipe) && ourBird.row < SCREEN_HEIGHT;
 }
 
+// randomize a pipe
 void generatePipeHeight(PIPE *pipe) {
     int baseHeight = pipeNeckHeight + 10;
     pipe->gapHeight = (birdHeight * 3) + rand() % (birdHeight * 4);
     pipe->topHeight = rand() % (SCREEN_HEIGHT - pipe->gapHeight - baseHeight) + (baseHeight / 2);
 }
 
+// draw the bird
 void drawBird() {
     drawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, bird);
 }
 
+// undraw the bird
 void undrawBird(const u16 *image) {
     undrawImage3(ourBird.row, ourBird.col, birdWidth, birdHeight, image);
 }
@@ -239,6 +251,7 @@ void drawPipes() {
     }
 }
 
+// draw one pipe, behaves differently when near edges
 void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
@@ -270,12 +283,14 @@ void drawPipe(PIPE *pipe) {
 
 }
 
+// undraw all pipes
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
         undrawPipeRear(pipes + i, background);
     }
 }
 
+// undraw the rear part of a pipe
 void undrawPipeRear(PIPE *pipe, const u16 *image) {
     if (!pipe->showing) {
         return;
@@ -303,6 +318,7 @@ void flyLess() {
     ourBird.row -= flyHeight - 3;
 }
 
+// moves the pipes as game proceeds
 void movePipes() {
     if (nextPipe != NULL && currentPipe->col + pipeNeckWidth < 0) {
         free(pipes);
