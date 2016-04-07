@@ -133,8 +133,8 @@ int main() {
                     break;
                 }
 
-                //drawBird();
-                drawPipes();
+                drawBird();
+                //drawPipes();
                 break;
             case GAME_OVER:
                 fillScreen(GREY);
