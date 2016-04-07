@@ -249,7 +249,7 @@ void drawPipe(PIPE *pipe) {
             drawImage3FromCol(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, 0, -pipe->col - pipeMargin,
                               pipeBodyWidth, pipeBodyHeight, pipeBody);
         }
-    } else if (pipe->col >= 1) {
+    } else if (pipe->col >= 2) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
             drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
         }
