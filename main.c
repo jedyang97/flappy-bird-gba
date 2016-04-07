@@ -273,7 +273,7 @@ void undrawPipeRear(PIPE *pipe, const u16 *image) {
     if (!pipe->showing) {
         return;
     }
-    if (pipe->col + pipeNeckWidth >= 0) {
+    if (pipe->col + pipeNeckWidth >= 1) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
             undrawImage3(i, pipe->col + pipeMargin + pipeBodyWidth, pipeSpeed, pipeBodyHeight, image);
         }
