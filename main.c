@@ -279,7 +279,7 @@ void undrawPipeRear(PIPE *pipe, const u16 *image) {
     undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col + pipeNeckWidth, pipeSpeed +1, pipeNeckHeight, image);
     undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col + pipeNeckWidth, pipeSpeed+1, pipeNeckHeight, image);
     for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin +1+ pipeBodyWidth,
+        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin + pipeBodyWidth,
                      pipeSpeed, pipeBodyHeight, image);
     }
 }
