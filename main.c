@@ -134,6 +134,9 @@ int main() {
                     state = GAME_OVER;
                     break;
                 }
+                if (KEY_DOWN_NOW(BUTTON_A)) {
+                    state = PLAY;
+                }
                 drawBird();
                 drawPipes();
                 break;
@@ -142,7 +145,7 @@ int main() {
                 state = GAME_OVER_NO_DRAW;
                 break;
             case GAME_OVER_NO_DRAW:
-                if (KEY_DOWN_NOW(BUTTON_SELECT) && !selectDownLastFrame) {
+                if (KEY_DOWN_NOW(BUTTON_START) && !startDownLastFrame) {
                     state = START;
                 }
                 break;
