@@ -130,13 +130,11 @@ int main() {
                     }
                 }
 
-                if (!checkAlive()) {
+                if (!checkAlive() && !KEY_DOWN_NOW(BUTTON_A)) {
                     state = GAME_OVER;
                     break;
                 }
-                if (KEY_DOWN_NOW(BUTTON_A)) {
-                    state = PLAY;
-                }
+
                 drawBird();
                 drawPipes();
                 break;
