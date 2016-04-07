@@ -116,7 +116,7 @@ int main() {
                 }
                 break;
             case PLAY:
-                //undrawBird(startScreen);
+                undrawBird(startScreen);
                 undrawPipes();
                 movePipes();
                 applyGravity();
@@ -133,7 +133,7 @@ int main() {
                     break;
                 }
 
-                drawBird();
+                //drawBird();
                 drawPipes();
                 break;
             case GAME_OVER:
