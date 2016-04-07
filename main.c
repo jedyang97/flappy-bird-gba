@@ -165,10 +165,10 @@ int main() {
         } else {
             upDownLastFrame = 0;
         }
-        if (KEY_DOWN_NOW(BUTTON_SELECT)) {
-            selectDownLastFrame = 1;
+        if (KEY_DOWN_NOW(BUTTON_START)) {
+            startDownLastFrame = 1;
         } else {
-            selectDownLastFrame = 0;
+            startDownLastFrame = 0;
         }
     }
 
