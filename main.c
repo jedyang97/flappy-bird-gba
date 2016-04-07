@@ -8,6 +8,7 @@
 #include "pipeNeckTop.h"
 #include "pipeBody.h"
 #include "gameoverScreen.h"
+#include "background.h"
 
 typedef struct {
     volatile int showing;
@@ -117,7 +118,7 @@ int main() {
                 }
                 break;
             case PLAY:
-                undrawBird(startScreen);
+                undrawBird(background);
                 undrawPipes();
                 movePipes();
                 applyGravity();
@@ -271,7 +272,7 @@ void drawPipe(PIPE *pipe) {
 
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
-        undrawPipeRear(pipes + i, startScreen);
+        undrawPipeRear(pipes + i, background);
     }
 }
 
