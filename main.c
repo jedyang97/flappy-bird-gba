@@ -143,7 +143,8 @@ int main() {
                 char string[5];
                 sprintf(string, "%d", score);
                 drawString(68, 150, string, WHITE);
-                drawString(150, (SCREEN_WIDTH - calcStringWidth("Press START to restart")) / 2, "Press START to restart",
+                drawString(150, (SCREEN_WIDTH - calcStringWidth("Press START to restart")) / 2,
+                           "Press START to restart",
                            WHITE);
                 state = GAME_OVER_NO_DRAW;
                 break;
@@ -324,9 +325,10 @@ void movePipes() {
             } else {
                 nextPipe = NULL;
             }
+            if (currentPipe != pipes + 1) {
+                score++;
+            }
             currentPipe = pipes + i;
-            score++;
-
         }
     }
 
