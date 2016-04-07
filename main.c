@@ -236,7 +236,7 @@ void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
     }
-    if (pipe->col < 0 && pipe->col + pipeNeckWidth > 0) {
+    if (pipe->col < 0) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
             drawImage3FromCol(i, 0, -pipe->col - pipeMargin, pipeBodyWidth, pipeBodyHeight,
                               pipeBody);
@@ -265,7 +265,7 @@ void drawPipe(PIPE *pipe) {
 
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
-        undrawPipeRear(pipes + i, startScreen);
+        //undrawPipeRear(pipes + i, startScreen);
     }
 }
 
