@@ -238,16 +238,16 @@ void drawPipe(PIPE *pipe) {
     }
     if (pipe->col < 0) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-            drawImage3FromCol(i, 0, -pipe->col, pipeBodyWidth + pipe->col + pipeMargin, pipeBodyHeight,
+            drawImage3FromCol(i, 0, -pipe->col - pipeMargin, pipeBodyWidth, pipeBodyHeight,
                               pipeBody);
         }
-        drawImage3FromCol(pipe->topHeight - pipeNeckHeight, 0, -pipe->col, pipeNeckWidth + pipe->col, pipeNeckHeight,
+        drawImage3FromCol(pipe->topHeight - pipeNeckHeight, 0, -pipe->col, pipeNeckWidth, pipeNeckHeight,
                           pipeNeckTop);
-        drawImage3FromCol(pipe->topHeight + pipe->gapHeight, 0, -pipe->col, pipeNeckWidth + pipe->col, pipeNeckHeight,
+        drawImage3FromCol(pipe->topHeight + pipe->gapHeight, 0, -pipe->col, pipeNeckWidth, pipeNeckHeight,
                           pipeNeckBottom);
         for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-            drawImage3FromCol(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, 0, -pipe->col,
-                              pipeBodyWidth + pipe->col + pipeMargin, pipeBodyHeight, pipeBody);
+            drawImage3FromCol(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, 0, -pipe->col - pipeMargin,
+                              pipeBodyWidth, pipeBodyHeight, pipeBody);
         }
     } else {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {

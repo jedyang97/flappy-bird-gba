@@ -72,7 +72,7 @@ void drawImage3FromCol(int r, int c, int colOffset, int width, int height, const
     for (int row = 0; row < height; ++row) {
         DMA[DMA_CHANNEL_3].src = image + OFFSET(row, colOffset, width);
         DMA[DMA_CHANNEL_3].dst = videoBuffer + OFFSET(r + row, c, 240);
-        DMA[DMA_CHANNEL_3].cnt = width |
+        DMA[DMA_CHANNEL_3].cnt = width - colOffset|
                                  DMA_SOURCE_INCREMENT |
                                  DMA_DESTINATION_INCREMENT |
                                  DMA_ON;
