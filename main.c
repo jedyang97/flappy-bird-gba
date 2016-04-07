@@ -116,8 +116,8 @@ int main() {
                 }
                 break;
             case PLAY:
-                undrawBird(startScreen);
-                //undrawPipes();
+                //undrawBird(startScreen);
+                undrawPipes();
                 movePipes();
                 applyGravity();
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
@@ -273,16 +273,14 @@ void undrawPipeRear(PIPE *pipe, const u16 *image) {
     if (!pipe->showing) {
         return;
     }
-    if (pipe->col + pipeNeckWidth >= -1) {
-        for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-            undrawImage3(i, pipe->col + pipeMargin + pipeBodyWidth, pipeSpeed, pipeBodyHeight, image);
-        }
-        undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col + pipeNeckWidth, pipeSpeed, pipeNeckHeight, image);
-        undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col + pipeNeckWidth, pipeSpeed, pipeNeckHeight, image);
-        for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-            undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin + pipeBodyWidth,
-                         pipeSpeed, pipeBodyHeight, image);
-        }
+    for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
+        undrawImage3(i, pipe->col + pipeMargin + pipeBodyWidth, pipeSpeed, pipeBodyHeight, image);
+    }
+    undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col + pipeNeckWidth, pipeSpeed, pipeNeckHeight, image);
+    undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col + pipeNeckWidth, pipeSpeed, pipeNeckHeight, image);
+    for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
+        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin + pipeBodyWidth,
+                     pipeSpeed, pipeBodyHeight, image);
     }
 }
 
