@@ -306,7 +306,7 @@ void movePipes() {
     }
     for (int i = 0; i < numPipes; ++i) {
         pipes[i].col -= pipeSpeed;
-        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col + pipeNeckWidth >= -2) {
+        if (pipes[i].col < SCREEN_WIDTH - pipeNeckWidth && pipes[i].col + pipeNeckWidth >= 1) {
             pipes[i].showing = 1;
         } else {
             pipes[i].showing = 0;
