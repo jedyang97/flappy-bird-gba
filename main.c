@@ -297,7 +297,7 @@ void flyLess() {
 }
 
 void movePipes() {
-    if (nextPipe != NULL && currentPipe->col < 0) {
+    if (nextPipe != NULL && currentPipe->col + pipeNeckWidth < 0) {
         free(pipes);
         pipes = nextPipe;
         currentPipe = nextPipe;
