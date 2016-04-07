@@ -60,8 +60,6 @@ void drawPipe(PIPE *pipe);
 
 void undrawPipeRear(PIPE *pipe, const u16 *image);
 
-void undrawPipeFront(PIPE *pipe, const u16 *image);
-
 void drawPipes();
 
 void undrawPipes();
@@ -251,25 +249,7 @@ void drawPipe(PIPE *pipe) {
 
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
-        if (pipes[i].col < 0) {
-            undrawPipeFront(pipes + i, startScreen);
-        }
         undrawPipeRear(pipes + i, startScreen);
-    }
-}
-
-void undrawPipeFront(PIPE *pipe, const u16 *image) {
-    if (!pipe->showing) {
-        return;
-    }
-    for (int i = -1; i < pipe->topHeight - pipeNeckHeight - 1; ++i) {
-        undrawImage3(i, SCREEN_WIDTH - (pipe->col + pipeMargin), pipeSpeed, pipeBodyHeight, image);
-    }
-    undrawImage3(pipe->topHeight - pipeNeckHeight, SCREEN_WIDTH - pipe->col, pipeSpeed, pipeNeckHeight, image);
-    undrawImage3(pipe->topHeight + pipe->gapHeight, SCREEN_WIDTH - pipe->col, pipeSpeed, pipeNeckHeight, image);
-    for (int i = -1; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight) - 1; ++i) {
-        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, SCREEN_WIDTH - (pipe->col + pipeMargin),
-                     pipeSpeed, pipeBodyHeight, image);
     }
 }
 
