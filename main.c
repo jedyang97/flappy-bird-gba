@@ -1,11 +1,13 @@
 #include "mylib.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include "text.h"
 #include "bird.h"
 #include "startScreen.h"
 #include "pipeNeckBottom.h"
 #include "pipeNeckTop.h"
 #include "pipeBody.h"
+#include "gameoverScreen.h"
 
 typedef struct {
     volatile int showing;
@@ -105,7 +107,6 @@ int main() {
                 drawBackground(startScreen);
                 drawBird();
                 drawPipes();
-                drawString(30, (SCREEN_WIDTH - calcStringWidth("Flappy Bird")) / 2, "Flappy Bird", MAGENTA);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press UP to start")) / 2, "Press UP to start",
                            WHITE);
                 break;
@@ -137,7 +138,10 @@ int main() {
                 drawPipes();
                 break;
             case GAME_OVER:
-                fillScreen(GREY);
+                drawBackground(gameoverScreen);
+                drawString(40, 100, sprintf("%d", score), WHITE);
+                drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to resume")) / 2, "Press START to resume",
+                           WHITE);
                 state = GAME_OVER_NO_DRAW;
                 break;
             case GAME_OVER_NO_DRAW:
