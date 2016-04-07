@@ -134,6 +134,8 @@ void undrawImage3(int r, int c, int width, int height, const u16 *image);
 
 void drawBackground(const u16 *image);
 
+void drawImage3FromCol(int r, int c, int colOffset, int width, int height, const u16 *image);
+
 int calcStringWidth(char *string);
 
 #endif //HW09_MYLIB_H

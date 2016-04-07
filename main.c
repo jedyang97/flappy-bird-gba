@@ -236,15 +236,31 @@ void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
     }
-    for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-        drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
+    if (pipe->col < 0) {
+        for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
+            drawImage3FromCol(i, 0, -pipe->col, pipeBodyWidth + pipe->col + pipeMargin, pipeBodyHeight,
+                              pipeBody);
+        }
+        drawImage3FromCol(pipe->topHeight - pipeNeckHeight, 0, -pipe->col, pipeNeckWidth + pipe->col, pipeNeckHeight,
+                          pipeNeckTop);
+        drawImage3FromCol(pipe->topHeight + pipe->gapHeight, 0, -pipe->col, pipeNeckWidth + pipe->col, pipeNeckHeight,
+                          pipeNeckBottom);
+        for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
+            drawImage3FromCol(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, 0, -pipe->col,
+                              pipeBodyWidth + pipe->col + pipeMargin, pipeBodyHeight, pipeBody);
+        }
+    } else {
+        for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
+            drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
+        }
+        drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
+        drawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckBottom);
+        for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
+            drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
+                       pipeBodyHeight, pipeBody);
+        }
     }
-    drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
-    drawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckBottom);
-    for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-        drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
-                   pipeBodyHeight, pipeBody);
-    }
+
 }
 
 void undrawPipes() {
