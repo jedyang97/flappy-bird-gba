@@ -40,7 +40,7 @@ const int delayTime = 1;
 const int flyHeight = 5;
 const int gravity = 1;
 const int pipeSpeed = 1;
-const int pipeDistance = 60;
+const int pipeDistance = 100;
 
 const int numPipes = 5;
 
@@ -236,9 +236,9 @@ void drawPipe(PIPE *pipe) {
     if (!pipe->showing) {
         return;
     }
-    if (pipe->col < 0 ) {
+    if (pipe->col < 0) {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-            drawImage3FromCol(i, -1, -pipe->col - pipeMargin, pipeBodyWidth+1, pipeBodyHeight,
+            drawImage3FromCol(i, -1, -pipe->col - pipeMargin, pipeBodyWidth + 1, pipeBodyHeight,
                               pipeBody);
         }
         drawImage3FromCol(pipe->topHeight - pipeNeckHeight, 0, -pipe->col, pipeNeckWidth, pipeNeckHeight,
@@ -247,7 +247,7 @@ void drawPipe(PIPE *pipe) {
                           pipeNeckBottom);
         for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
             drawImage3FromCol(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, -1, -pipe->col - pipeMargin,
-                              pipeBodyWidth+1, pipeBodyHeight, pipeBody);
+                              pipeBodyWidth + 1, pipeBodyHeight, pipeBody);
         }
     } else {
         for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
@@ -274,13 +274,13 @@ void undrawPipeRear(PIPE *pipe, const u16 *image) {
         return;
     }
     for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-        undrawImage3(i, pipe->col + pipeMargin + pipeBodyWidth-1, pipeSpeed+1, pipeBodyHeight, image);
+        undrawImage3(i, pipe->col + pipeMargin + pipeBodyWidth - 1, pipeSpeed + 1, pipeBodyHeight, image);
     }
-    undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col + pipeNeckWidth - 1, pipeSpeed , pipeNeckHeight, image);
+    undrawImage3(pipe->topHeight - pipeNeckHeight, pipe->col + pipeNeckWidth - 1, pipeSpeed, pipeNeckHeight, image);
     undrawImage3(pipe->topHeight + pipe->gapHeight, pipe->col + pipeNeckWidth - 1, pipeSpeed, pipeNeckHeight, image);
     for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin + pipeBodyWidth-1,
-                     pipeSpeed+1, pipeBodyHeight, image);
+        undrawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin + pipeBodyWidth - 1,
+                     pipeSpeed + 1, pipeBodyHeight, image);
     }
 }
 
