@@ -185,7 +185,6 @@ void reset() {
     ourBird.col = SCREEN_WIDTH / 6;
     ourBird.row = SCREEN_HEIGHT / 2 - birdHeight / 2;
 
-
     score = 0;
 }
 
