@@ -113,7 +113,7 @@ int main() {
                 break;
             case START_NO_DRAW:
                 if (KEY_DOWN_NOW(BUTTON_UP) && !upDownLastFrame) {
-                    drawBackground(startScreen);
+                    drawBackground(background);
                     state = PLAY;
                 }
                 break;
