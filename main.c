@@ -250,14 +250,14 @@ void drawPipe(PIPE *pipe) {
                               pipeBodyWidth, pipeBodyHeight, pipeBody);
         }
     } else {
-        for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
-            drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
-        }
-        drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
-        drawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckBottom);
-        for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
-            drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
-                       pipeBodyHeight, pipeBody);
+//        for (int i = 0; i < pipe->topHeight - pipeNeckHeight; ++i) {
+//            drawImage3(i, pipe->col + pipeMargin, pipeBodyWidth, pipeBodyHeight, pipeBody);
+//        }
+//        drawImage3(pipe->topHeight - pipeNeckHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckTop);
+//        drawImage3(pipe->topHeight + pipe->gapHeight, pipe->col, pipeNeckWidth, pipeNeckHeight, pipeNeckBottom);
+//        for (int i = 0; i < SCREEN_HEIGHT - (pipe->topHeight + pipe->gapHeight + pipeNeckHeight); ++i) {
+//            drawImage3(i + pipe->topHeight + pipe->gapHeight + pipeNeckHeight, pipe->col + pipeMargin, pipeBodyWidth,
+//                       pipeBodyHeight, pipeBody);
         }
     }
 
@@ -265,7 +265,7 @@ void drawPipe(PIPE *pipe) {
 
 void undrawPipes() {
     for (int i = 0; i < numPipes; ++i) {
-        //undrawPipeRear(pipes + i, startScreen);
+        undrawPipeRear(pipes + i, startScreen);
     }
 }
 
