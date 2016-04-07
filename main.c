@@ -139,7 +139,7 @@ int main() {
                 break;
             case GAME_OVER:
                 drawBackground(gameoverScreen);
-                char *string;
+                char string[10];
                 sprintf(string, "%d", score);
                 drawString(40, 100, string, WHITE);
                 drawString(50, (SCREEN_WIDTH - calcStringWidth("Press START to resume")) / 2, "Press START to resume",
