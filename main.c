@@ -117,7 +117,7 @@ int main() {
                 break;
             case PLAY:
                 undrawBird(startScreen);
-                undrawPipes();
+                //undrawPipes();
                 movePipes();
                 applyGravity();
                 if (KEY_DOWN_NOW(BUTTON_UP)) {
