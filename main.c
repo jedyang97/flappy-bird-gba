@@ -83,7 +83,7 @@ int checkAlive();
 void drawBackground(const u16 *image);
 
 
-int score = 0;
+volatile int score = 0;
 
 BIRD ourBird;
 PIPE *pipes;
