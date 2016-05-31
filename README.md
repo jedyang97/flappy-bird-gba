@@ -1,5 +1,5 @@
 # Flappy Bird
-GBA version of the famous Flappy Bird game. Georgia Tech CS 2110 project.
+GBA version of the famous Flappy Bird game. Project for Georgia Tech CS 2110.
 
 How to play:
 
